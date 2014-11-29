@@ -5,6 +5,20 @@
  */
 package oficina;
 
+import java.awt.CardLayout;
+import oficina.unused.FormBusca;
+import oficina.unused.FormPessoa;
+import oficina.unused.FormOs;
+import oficina.unused.FormCarro;
+import oficina.classes.Funcionario;
+import java.awt.Color;
+import java.util.Random;
+import javax.swing.JOptionPane;
+import oficina.forms.FormBuscaPanel;
+import oficina.forms.FormCarroPanel;
+import oficina.forms.FormOsPanel;
+import oficina.forms.FormPessoaPanel;
+
 /**
  *
  * @author Filipe
@@ -14,11 +28,29 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form TelaInicial
      */
-    public MenuPrincipal(Funcionario l) {
+    public MenuPrincipal(Funcionario f) {
         initComponents();
+        
+        this.funcionario = f;
+        
+        panelPessoa = new FormPessoaPanel(f);
+        panelCarro = new FormCarroPanel(f);
+        panelOs = new FormOsPanel(funcionario);
+        panelBusca = new FormBuscaPanel();
+        
+        panelMid.add(panelPessoa, "pessoa");
+        panelMid.add(panelCarro, "carro");
+        panelMid.add(panelOs, "os");
+        panelMid.add(panelBusca, "busca");
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "pessoa");
+
+        panelMid.setPreferredSize(panelPessoa.getPreferredSize());
+        this.pack();
+        
         this.setLocationRelativeTo(null);
-        lbUsuarioText.setText(l.getCodFuncionario());
-        //lbPermissaoText.setText("");
+        lbNomeText.setText(funcionario.getNome());
+        lbUsuarioText.setText(""+funcionario.getCodFuncionario());
+        lbPermissaoText.setText("Atendente");
     }
 
     /**
@@ -28,51 +60,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
-        panelTitulo = new javax.swing.JPanel();
-        lbMenu = new javax.swing.JLabel();
-        panelUsuario = new javax.swing.JPanel();
+        panelMidHolder = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panelMidHolderInside = new javax.swing.JPanel();
+        panelMid = new javax.swing.JPanel();
+        panelBottom = new javax.swing.JPanel();
         lbIconUsuario = new javax.swing.JLabel();
         paneTextHolder = new javax.swing.JPanel();
         paneUsuario = new javax.swing.JPanel();
         lbNome = new javax.swing.JLabel();
         lbNomeText = new javax.swing.JLabel();
-        panelNome = new javax.swing.JPanel();
         lbUsuario = new javax.swing.JLabel();
         lbUsuarioText = new javax.swing.JLabel();
         panelPermissao = new javax.swing.JPanel();
         lbPermissao = new javax.swing.JLabel();
         lbPermissaoText = new javax.swing.JLabel();
-        panelBotoes = new javax.swing.JPanel();
+        panelLeft = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         btCadPessoa = new javax.swing.JButton();
         btCadCarro = new javax.swing.JButton();
         btCadOs = new javax.swing.JButton();
         btBusca = new javax.swing.JButton();
-        panelSeparatorRight = new javax.swing.JPanel();
-        panelSeparatorLeft = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMinimumSize(new java.awt.Dimension(200, 200));
-        setPreferredSize(new java.awt.Dimension(300, 360));
-        setResizable(false);
 
-        panelTitulo.setToolTipText("Menu");
+        panelMidHolder.setLayout(new javax.swing.BoxLayout(panelMidHolder, javax.swing.BoxLayout.PAGE_AXIS));
 
-        lbMenu.setFont(new java.awt.Font("Tahoma", 1, 30)); // NOI18N
-        lbMenu.setText("Menu Principal");
-        panelTitulo.add(lbMenu);
+        panelMid.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        panelMid.setMinimumSize(new java.awt.Dimension(220, 220));
+        panelMid.setPreferredSize(new java.awt.Dimension(220, 220));
+        panelMid.setLayout(new java.awt.CardLayout());
+        panelMidHolderInside.add(panelMid);
 
-        getContentPane().add(panelTitulo, java.awt.BorderLayout.PAGE_START);
+        jScrollPane1.setViewportView(panelMidHolderInside);
 
-        panelUsuario.setLayout(new javax.swing.BoxLayout(panelUsuario, javax.swing.BoxLayout.LINE_AXIS));
+        panelMidHolder.add(jScrollPane1);
+
+        getContentPane().add(panelMidHolder, java.awt.BorderLayout.CENTER);
+
+        panelBottom.setLayout(new javax.swing.BoxLayout(panelBottom, javax.swing.BoxLayout.LINE_AXIS));
 
         lbIconUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lbIconUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/login.png"))); // NOI18N
-        panelUsuario.add(lbIconUsuario);
+        panelBottom.add(lbIconUsuario);
 
         paneTextHolder.setLayout(new javax.swing.BoxLayout(paneTextHolder, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -86,19 +121,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbNomeText.setText("nomeUsuario(bd)");
         paneUsuario.add(lbNomeText);
 
-        paneTextHolder.add(paneUsuario);
-
-        panelNome.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
         lbUsuario.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lbUsuario.setText("Usuário: ");
-        panelNome.add(lbUsuario);
+        paneUsuario.add(lbUsuario);
 
         lbUsuarioText.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lbUsuarioText.setText("usuario(bd)");
-        panelNome.add(lbUsuarioText);
+        paneUsuario.add(lbUsuarioText);
 
-        paneTextHolder.add(panelNome);
+        paneTextHolder.add(paneUsuario);
 
         panelPermissao.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -112,13 +143,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         paneTextHolder.add(panelPermissao);
 
-        panelUsuario.add(paneTextHolder);
+        panelBottom.add(paneTextHolder);
 
-        getContentPane().add(panelUsuario, java.awt.BorderLayout.PAGE_END);
+        getContentPane().add(panelBottom, java.awt.BorderLayout.PAGE_END);
 
-        panelBotoes.setMinimumSize(new java.awt.Dimension(220, 220));
-        panelBotoes.setPreferredSize(new java.awt.Dimension(220, 220));
-        panelBotoes.setLayout(new java.awt.GridLayout(2, 3));
+        panelLeft.setLayout(new javax.swing.BoxLayout(panelLeft, javax.swing.BoxLayout.PAGE_AXIS));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
         btCadPessoa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btCadPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/pessoaFisica.png"))); // NOI18N
@@ -126,14 +158,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btCadPessoa.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadPessoa.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadPessoa.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadPessoa.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                btCadPessoaMouseClicked(evt);
+        btCadPessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadPessoaActionPerformed(evt);
             }
         });
-        panelBotoes.add(btCadPessoa);
+        jPanel1.add(btCadPessoa);
 
         btCadCarro.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btCadCarro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/car.png"))); // NOI18N
@@ -141,14 +171,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btCadCarro.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadCarro.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadCarro.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadCarro.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                btCadCarroMouseClicked(evt);
+        btCadCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadCarroActionPerformed(evt);
             }
         });
-        panelBotoes.add(btCadCarro);
+        jPanel1.add(btCadCarro);
 
         btCadOs.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btCadOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/checklist.png"))); // NOI18N
@@ -156,14 +184,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btCadOs.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadOs.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadOs.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadOs.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                btCadOsMouseClicked(evt);
+        btCadOs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadOsActionPerformed(evt);
             }
         });
-        panelBotoes.add(btCadOs);
+        jPanel1.add(btCadOs);
 
         btBusca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/search.png"))); // NOI18N
@@ -171,56 +197,62 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btBusca.setMaximumSize(new java.awt.Dimension(110, 110));
         btBusca.setMinimumSize(new java.awt.Dimension(110, 110));
         btBusca.setPreferredSize(new java.awt.Dimension(110, 110));
-        btBusca.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                btBuscaMouseClicked(evt);
+        btBusca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btBuscaActionPerformed(evt);
             }
         });
-        panelBotoes.add(btBusca);
+        jPanel1.add(btBusca);
 
-        getContentPane().add(panelBotoes, java.awt.BorderLayout.CENTER);
-        getContentPane().add(panelSeparatorRight, java.awt.BorderLayout.LINE_END);
-        getContentPane().add(panelSeparatorLeft, java.awt.BorderLayout.LINE_START);
+        panelLeft.add(jPanel1);
+
+        getContentPane().add(panelLeft, java.awt.BorderLayout.LINE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btCadPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCadPessoaMouseClicked
-        FormPessoa f;
+    private void btCadPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadPessoaActionPerformed
+        /*FormPessoaPanel f;
 
-        f = new FormPessoa();
-        f.setVisible(true);
-    }//GEN-LAST:event_btCadPessoaMouseClicked
+        f = new FormPessoaPanel();
+        f.setVisible(true);*/
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "pessoa");
+        panelMid.setPreferredSize(panelPessoa.getPreferredSize());
+    }//GEN-LAST:event_btCadPessoaActionPerformed
 
-    private void btCadCarroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCadCarroMouseClicked
-        FormCarro c;
+    private void btCadCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadCarroActionPerformed
+        /*FormCarro c;
 
         c = new FormCarro();
-        c.setVisible(true);
-    }//GEN-LAST:event_btCadCarroMouseClicked
+        c.setVisible(true);*/
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "carro");
+        panelMid.setPreferredSize(panelCarro.getPreferredSize());
+    }//GEN-LAST:event_btCadCarroActionPerformed
 
-    private void btCadOsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btCadOsMouseClicked
-        FormOs os;
+    private void btCadOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadOsActionPerformed
+        /*FormOs os;
 
         os = new FormOs();
-        os.setVisible(true);
-    }//GEN-LAST:event_btCadOsMouseClicked
+        os.setVisible(true);*/
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "os");
+        panelMid.setPreferredSize(panelOs.getPreferredSize());
+    }//GEN-LAST:event_btCadOsActionPerformed
 
-    private void btBuscaMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_btBuscaMouseClicked
-    {//GEN-HEADEREND:event_btBuscaMouseClicked
-        FormBusca b = new FormBusca();
-        b.setVisible(true);
-    }//GEN-LAST:event_btBuscaMouseClicked
+    private void btBuscaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscaActionPerformed
+        /*FormBusca b = new FormBusca();
+        b.setVisible(true);*/
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "busca");
+        panelMid.setPreferredSize(panelBusca.getPreferredSize());
+    }//GEN-LAST:event_btBuscaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBusca;
     private javax.swing.JButton btCadCarro;
     private javax.swing.JButton btCadOs;
     private javax.swing.JButton btCadPessoa;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbIconUsuario;
-    private javax.swing.JLabel lbMenu;
     private javax.swing.JLabel lbNome;
     private javax.swing.JLabel lbNomeText;
     private javax.swing.JLabel lbPermissao;
@@ -229,12 +261,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsuarioText;
     private javax.swing.JPanel paneTextHolder;
     private javax.swing.JPanel paneUsuario;
-    private javax.swing.JPanel panelBotoes;
-    private javax.swing.JPanel panelNome;
+    private javax.swing.JPanel panelBottom;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JPanel panelMid;
+    private javax.swing.JPanel panelMidHolder;
+    private javax.swing.JPanel panelMidHolderInside;
     private javax.swing.JPanel panelPermissao;
-    private javax.swing.JPanel panelSeparatorLeft;
-    private javax.swing.JPanel panelSeparatorRight;
-    private javax.swing.JPanel panelTitulo;
-    private javax.swing.JPanel panelUsuario;
     // End of variables declaration//GEN-END:variables
+    private Funcionario funcionario;
+    
+    private FormPessoaPanel panelPessoa;
+    private FormCarroPanel panelCarro;
+    private FormOsPanel panelOs;
+    private FormBuscaPanel panelBusca;
 }
