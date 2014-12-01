@@ -5,7 +5,6 @@
  */
 package oficina.visualizar;
 
-import oficina.unused.FormOs;
 import oficina.classes.OrdemDeServico;
 import oficina.classes.Servico;
 import javax.swing.DefaultListModel;
@@ -44,7 +43,7 @@ public class VisualizaOs extends javax.swing.JFrame
     public void atualizaVisualizacao(){
         lbCodigoOsText.setText(Integer.toString(osTemp.getCodigoOs()));
         lbPlacaText.setText(osTemp.getPlacaCarro());
-        lbCodClienteText.setText(osTemp.getCodCliente());
+        lbCodClienteText.setText(osTemp.getCpfCliente());
         lblKmEntradaText.setText(osTemp.getKmEntrada());
         lbKmSaidaText.setText(osTemp.getKmSaida());
         lbDataInicioText.setText(osTemp.getDataInicio());
@@ -69,7 +68,7 @@ public class VisualizaOs extends javax.swing.JFrame
     {
         osTemp.setCodigoOs(Integer.parseInt(lbCodigoOsText.getText()));
         osTemp.setPlacaCarro(lbPlacaText.getText());
-        osTemp.setCodCliente(lbCodClienteText.getText());
+        osTemp.setCpfCliente(lbCodClienteText.getText());
         osTemp.setKmEntrada(lblKmEntradaText.getText());
         osTemp.setKmSaida(lbKmSaidaText.getText());
         osTemp.setDataInicio(lbDataInicioText.getText());

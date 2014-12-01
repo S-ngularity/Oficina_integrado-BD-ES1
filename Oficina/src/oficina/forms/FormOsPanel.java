@@ -375,6 +375,7 @@ public class FormOsPanel extends javax.swing.JPanel {
     private void btSelecionarCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarCarroActionPerformed
         buscaCarroModal dlg = new buscaCarroModal((JFrame)SwingUtilities.getWindowAncestor(this), true);
         placa = dlg.showDiag();
+        codigoCliente = dlg.codCliente();
 
         if(placa != null)
         {
@@ -481,17 +482,13 @@ public class FormOsPanel extends javax.swing.JPanel {
             // cria objeto os temporário
             os = new OrdemDeServico();
 
-            os.setCodigoOs(0); // colocar código incrementado
+            
             os.setPlacaCarro(placa);
-            os.setCodCliente(clienteCpfCnpj);
+            os.setCpfCliente(clienteCpfCnpj);
             os.setKmEntrada(tfKmEntrada.getText());
-            os.setKmSaida(tfKmSaida.getText());
-            os.setDataInicio(tfDataInicio.getText());
-            os.setDataFim(tfDataFim.getText());
-            os.setHoraInicio(tfHoraInicio.getText());
-            os.setHoraFim(tfHoraFim.getText());
-            os.setTipo(cboxTipo.getSelectedItem().toString());
             os.setEstado(cboxEstado.getSelectedItem().toString());
+            os.setCodCliente(codigoCliente);
+            os.setValorTotal(""+valor);
 
             // copia lista da interface pra lista do objeto
             DefaultListModel d = (DefaultListModel) lServicos.getModel();
@@ -628,6 +625,7 @@ public class FormOsPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
     private String placa;
     private String clienteCpfCnpj;
+    private int codigoCliente;
     private int valor;
     
     private OrdemDeServico os;

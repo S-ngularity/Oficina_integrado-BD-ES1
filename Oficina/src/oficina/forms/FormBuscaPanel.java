@@ -4,14 +4,24 @@
  * and open the template in the editor.
  */
 package oficina.forms;
-import oficina.unused.FormOs;
-import oficina.unused.FormPessoa;
 import java.awt.Color;
+import java.awt.Component;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import oficina.classes.Carro;
 import oficina.classes.ConexaoBd;
+import oficina.classes.OrdemDeServico;
+import oficina.classes.PessoaFisica;
+import oficina.classes.PessoaJuridica;
 import oficina.visualizar.VisualizaCarro;
+import oficina.visualizar.VisualizaOs;
+import oficina.visualizar.VisualizaPessoaFisica;
+import oficina.visualizar.VisualizaPessoaJuridica;
 
 /**
  *
@@ -37,7 +47,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
@@ -48,6 +57,9 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         tfNumOs = new javax.swing.JTextField();
         panelBuscarOs = new javax.swing.JPanel();
         btBuscarOs = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabelaOS = new javax.swing.JTable();
         panelBuscaCarro = new javax.swing.JPanel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelPlaca = new javax.swing.JPanel();
@@ -55,30 +67,50 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         tfPlaca = new javax.swing.JTextField();
         panelBuscarPlaca = new javax.swing.JPanel();
         btBuscarPlaca = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tabelaCarro = new javax.swing.JTable();
         panelBuscaFisica = new javax.swing.JPanel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCpf = new javax.swing.JPanel();
+        radioFisicaCPF = new javax.swing.JRadioButton();
         lbCpf = new javax.swing.JLabel();
         tfFisicaCpf = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
+        radioFisicaNome = new javax.swing.JRadioButton();
+        lbNomeCliente = new javax.swing.JLabel();
+        tfFisicaNome = new javax.swing.JTextField();
         panelBuscarCpf = new javax.swing.JPanel();
         btCpf = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaFisica = new javax.swing.JTable();
         panelBuscaJuridica = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCnpj = new javax.swing.JPanel();
+        radioJuridicaCNPJ = new javax.swing.JRadioButton();
         lbCnpj = new javax.swing.JLabel();
         tfJuridicaCnpj = new javax.swing.JFormattedTextField();
+        jPanel2 = new javax.swing.JPanel();
+        radioJuridicaNome = new javax.swing.JRadioButton();
+        lbNomeComercial = new javax.swing.JLabel();
+        tfJuridicaNome = new javax.swing.JTextField();
         panelBuscarCnpj = new javax.swing.JPanel();
         btBuscarCnpj = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabelaJuridica = new javax.swing.JTable();
 
-        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
+        setPreferredSize(new java.awt.Dimension(450, 300));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+
+        panelTitulo.setMinimumSize(new java.awt.Dimension(80, 0));
+        panelTitulo.setPreferredSize(new java.awt.Dimension(400, 0));
 
         lbTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbTitulo.setText("Busca");
         panelTitulo.add(lbTitulo);
 
-        jPanel1.add(panelTitulo);
+        add(panelTitulo);
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(400, 150));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(400, 200));
 
         panelBuscaOs.setLayout(new javax.swing.BoxLayout(panelBuscaOs, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaOs.add(filler2);
@@ -98,8 +130,46 @@ public class FormBuscaPanel extends javax.swing.JPanel {
             }
         });
         panelBuscarOs.add(btBuscarOs);
+        panelBuscarOs.add(jSeparator1);
 
         panelBuscaOs.add(panelBuscarOs);
+
+        tabelaOS.setBackground(new java.awt.Color(204, 204, 204));
+        tabelaOS.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Numero da OS", "Carro", "Estado"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaOS.setShowHorizontalLines(false);
+        tabelaOS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaOSMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(tabelaOS);
+
+        panelBuscaOs.add(jScrollPane4);
 
         jTabbedPane1.addTab("Ordem de Serviço", panelBuscaOs);
 
@@ -129,10 +199,54 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaCarro.add(panelBuscarPlaca);
 
+        tabelaCarro.setBackground(new java.awt.Color(204, 204, 204));
+        tabelaCarro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Placa", "Modelo", "Cliente"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaCarro.setShowHorizontalLines(false);
+        tabelaCarro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaCarroMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(tabelaCarro);
+
+        panelBuscaCarro.add(jScrollPane3);
+
         jTabbedPane1.addTab("Carro", panelBuscaCarro);
 
         panelBuscaFisica.setLayout(new javax.swing.BoxLayout(panelBuscaFisica, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaFisica.add(filler3);
+
+        radioFisicaCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFisicaCPFActionPerformed(evt);
+            }
+        });
+        panelCpf.add(radioFisicaCPF);
 
         lbCpf.setText("CPF do Cliente: ");
         panelCpf.add(lbCpf);
@@ -145,6 +259,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         }
         tfFisicaCpf.setText("000.000.000-00");
         tfFisicaCpf.setToolTipText("");
+        tfFisicaCpf.setEnabled(false);
         tfFisicaCpf.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfFisicaCpfFocusGained(evt);
@@ -157,6 +272,22 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(panelCpf);
 
+        radioFisicaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioFisicaNomeActionPerformed(evt);
+            }
+        });
+        jPanel1.add(radioFisicaNome);
+
+        lbNomeCliente.setText("Nome do Cliente: ");
+        jPanel1.add(lbNomeCliente);
+
+        tfFisicaNome.setColumns(15);
+        tfFisicaNome.setEnabled(false);
+        jPanel1.add(tfFisicaNome);
+
+        panelBuscaFisica.add(jPanel1);
+
         btCpf.setText("Buscar");
         btCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -167,10 +298,54 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(panelBuscarCpf);
 
+        tabelaFisica.setBackground(new java.awt.Color(204, 204, 204));
+        tabelaFisica.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Cliente", "CPF/CNPJ"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaFisica.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabelaFisica.setShowHorizontalLines(false);
+        tabelaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaFisicaMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelaFisica);
+
+        panelBuscaFisica.add(jScrollPane1);
+
         jTabbedPane1.addTab("Pessoa Física", panelBuscaFisica);
 
         panelBuscaJuridica.setLayout(new javax.swing.BoxLayout(panelBuscaJuridica, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaJuridica.add(filler5);
+
+        radioJuridicaCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioJuridicaCNPJActionPerformed(evt);
+            }
+        });
+        panelCnpj.add(radioJuridicaCNPJ);
 
         lbCnpj.setText("CNPJ da Empresa: ");
         panelCnpj.add(lbCnpj);
@@ -182,6 +357,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
             ex.printStackTrace();
         }
         tfJuridicaCnpj.setText("00.000.000/0000-00");
+        tfJuridicaCnpj.setEnabled(false);
         tfJuridicaCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 tfJuridicaCnpjFocusGained(evt);
@@ -194,6 +370,22 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(panelCnpj);
 
+        radioJuridicaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioJuridicaNomeActionPerformed(evt);
+            }
+        });
+        jPanel2.add(radioJuridicaNome);
+
+        lbNomeComercial.setText("Nome Comercial: ");
+        jPanel2.add(lbNomeComercial);
+
+        tfJuridicaNome.setColumns(19);
+        tfJuridicaNome.setEnabled(false);
+        jPanel2.add(tfJuridicaNome);
+
+        panelBuscaJuridica.add(jPanel2);
+
         btBuscarCnpj.setText("Buscar");
         btBuscarCnpj.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -204,22 +396,58 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(panelBuscarCnpj);
 
+        tabelaJuridica.setBackground(new java.awt.Color(204, 204, 204));
+        tabelaJuridica.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "ID", "Empresa", "CNPJ"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabelaJuridica.setShowHorizontalLines(false);
+        tabelaJuridica.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaJuridicaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabelaJuridica);
+
+        panelBuscaJuridica.add(jScrollPane2);
+
         jTabbedPane1.addTab("Pessoa Jurídica", panelBuscaJuridica);
 
-        jPanel1.add(jTabbedPane1);
-
-        add(jPanel1);
+        add(jTabbedPane1);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarOsActionPerformed
-        Random generator = new Random();
-        if(generator.nextBoolean() == true)
-        {
-            new FormOs().setVisible(true); // mudar para VisualizaOs(osBusca) quando osBusca conseguir ser retorno de busca no BD
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+        OrdemDeServico os;
+        try {this.osLista.clear();}catch(RuntimeException e){this.osLista = new ArrayList<OrdemDeServico>();}
+        ConexaoBd bd = new ConexaoBd();
+        os = bd.buscaOSCod(Integer.parseInt(tfNumOs.getText()));
+        DefaultTableModel model = (DefaultTableModel)tabelaOS.getModel(); 
+        model.setNumRows(0);
+        
+        if(os != null)
+        {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getTipo()});
+            this.osLista.add(os);
         }
     }//GEN-LAST:event_btBuscarOsActionPerformed
 
@@ -254,17 +482,15 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPlacaKeyTyped
 
     private void btBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPlacaActionPerformed
+        Carro carro;
+        try {this.carrosLista.clear();}catch(RuntimeException e){this.carrosLista = new ArrayList<Carro>();}
         ConexaoBd bd = new ConexaoBd();
-        
-        Carro carro = bd.buscaCarro(tfPlaca.getText());
+        carro = bd.buscaCarroPlaca(tfPlaca.getText());
+        DefaultTableModel model = (DefaultTableModel)tabelaCarro.getModel(); 
+        model.setNumRows(0);
         if(carro != null)
-        {
-            new VisualizaCarro(carro).setVisible(true);
-        }
-        
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+        {    model.addRow(new Object[]{carro.getPlaca(), carro.getNomeModelo(), bd.buscaNomeDono(carro.getCodDono())});
+            this.carrosLista.add(carro);
         }
     }//GEN-LAST:event_btBuscarPlacaActionPerformed
 
@@ -285,14 +511,36 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tfFisicaCpfFocusLost
 
     private void btCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCpfActionPerformed
-        Random generator = new Random();
-        if(generator.nextBoolean() == true)
+        if(radioFisicaCPF.isSelected())
         {
-            new FormPessoa().setVisible(true); // mudar para VisualizaPessoaFisica(pfBusca) quando pfBusca conseguir ser retorno de busca no BD
+            PessoaFisica cliente;
+            try {this.clientesFisicos.clear();}catch(RuntimeException e){this.clientesFisicos = new ArrayList<PessoaFisica>();}
+            ConexaoBd bd = new ConexaoBd();
+            cliente = bd.buscaPessoaFisicaCPF(tfFisicaCpf.getText());
+            DefaultTableModel model = (DefaultTableModel)tabelaFisica.getModel(); 
+            model.setNumRows(0);
+            if(cliente != null)
+            {    model.addRow(new Object[]{cliente.getCodCliente(), cliente.getNome(), cliente.getCPF()});
+                 this.clientesFisicos.add(cliente);
+            }
+
         }
-        else
+        if(radioFisicaNome.isSelected())
         {
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+            
+            PessoaFisica cliente;
+            ConexaoBd bd = new ConexaoBd();
+            try {this.clientesFisicos.clear();}catch(RuntimeException e){}
+            this.clientesFisicos = bd.buscaPessoaFisicaNome(tfFisicaNome.getText());
+            Iterator<PessoaFisica> it = this.clientesFisicos.iterator();
+            DefaultTableModel model = (DefaultTableModel)tabelaFisica.getModel(); 
+            model.setNumRows(0);
+            
+            while(it.hasNext())
+            {   cliente = it.next();
+                model.addRow(new Object[]{cliente.getCodCliente(), cliente.getNome(), cliente.getCPF()});
+            }
+            
         }
     }//GEN-LAST:event_btCpfActionPerformed
 
@@ -314,16 +562,112 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tfJuridicaCnpjFocusLost
 
     private void btBuscarCnpjActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarCnpjActionPerformed
-        Random generator = new Random();
-        if(generator.nextBoolean() == true)
+        
+         if(radioJuridicaCNPJ.isSelected())
         {
-            new FormPessoa().setVisible(true); // mudar para VisualizaPessoaJuridica(pjBusca) quando pjBusca conseguir ser retorno de busca no BD
+            PessoaJuridica cliente;
+            try {this.clientesJuridicos.clear();}catch(RuntimeException e){this.clientesJuridicos = new ArrayList<PessoaJuridica>();}
+            ConexaoBd bd = new ConexaoBd();
+            cliente = bd.buscaPessoaJuridicaCNPJ(tfJuridicaCnpj.getText());
+            DefaultTableModel model = (DefaultTableModel)tabelaJuridica.getModel(); 
+            model.setNumRows(0);
+            if(cliente != null)
+            {
+                model.addRow(new Object[]{cliente.getCodCliente(), cliente.getNomeFantasia(), cliente.getCNPJ()});
+                this.clientesJuridicos.add(cliente);
+            }
+            
+            
+
         }
-        else
+        if(radioJuridicaNome.isSelected())
         {
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+            
+            PessoaJuridica cliente;
+            ConexaoBd bd = new ConexaoBd();
+            try {this.clientesJuridicos.clear();}catch(RuntimeException e){}
+            this.clientesJuridicos = bd.buscaPessoaJuridicaNome(tfJuridicaNome.getText());
+            Iterator<PessoaJuridica> it = this.clientesJuridicos.iterator();
+            DefaultTableModel model = (DefaultTableModel)tabelaJuridica.getModel(); 
+            model.setNumRows(0);
+            
+            while(it.hasNext())
+            {   cliente = it.next();
+                model.addRow(new Object[]{cliente.getCodCliente(), cliente.getNomeFantasia(), cliente.getCNPJ()});
+            }
+            
         }
     }//GEN-LAST:event_btBuscarCnpjActionPerformed
+
+    private void radioFisicaCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFisicaCPFActionPerformed
+        // TODO add your handling code here:
+        radioFisicaNome.setSelected(false);
+        tfFisicaCpf.setEnabled(true);
+        tfFisicaNome.setEnabled(false);
+        
+        
+    }//GEN-LAST:event_radioFisicaCPFActionPerformed
+
+    private void radioFisicaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFisicaNomeActionPerformed
+        // TODO add your handling code here:
+        radioFisicaCPF.setSelected(false);
+        tfFisicaCpf.setEnabled(false);
+        tfFisicaNome.setEnabled(true);
+    }//GEN-LAST:event_radioFisicaNomeActionPerformed
+
+    private void tabelaFisicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaFisicaMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2)
+        {
+            PessoaFisica cliente = this.clientesFisicos.get(tabelaFisica.getSelectedRow());
+           new VisualizaPessoaFisica(cliente).setVisible(true);
+           
+        }
+    }//GEN-LAST:event_tabelaFisicaMouseClicked
+
+    private void radioJuridicaCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioJuridicaCNPJActionPerformed
+        // TODO add your handling code here:
+         radioJuridicaNome.setSelected(false);
+        tfJuridicaCnpj.setEnabled(true);
+        tfJuridicaNome.setEnabled(false);
+    }//GEN-LAST:event_radioJuridicaCNPJActionPerformed
+
+    private void radioJuridicaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioJuridicaNomeActionPerformed
+        // TODO add your handling code here:
+        radioJuridicaCNPJ.setSelected(false);
+        tfJuridicaCnpj.setEnabled(false);
+        tfJuridicaNome.setEnabled(true);
+    }//GEN-LAST:event_radioJuridicaNomeActionPerformed
+
+    private void tabelaJuridicaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaJuridicaMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2)
+        {
+            PessoaJuridica cliente = this.clientesJuridicos.get(tabelaJuridica.getSelectedRow());
+           new VisualizaPessoaJuridica(cliente).setVisible(true);
+           
+        }
+    }//GEN-LAST:event_tabelaJuridicaMouseClicked
+
+    private void tabelaCarroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaCarroMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2)
+        {
+            Carro carro = this.carrosLista.get(tabelaCarro.getSelectedRow());
+           new VisualizaCarro(carro).setVisible(true);
+           
+        }
+    }//GEN-LAST:event_tabelaCarroMouseClicked
+
+    private void tabelaOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaOSMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2)
+        {
+            OrdemDeServico os = this.osLista.get(tabelaOS.getSelectedRow());
+           new VisualizaOs(os).setVisible(true);
+           
+        }
+    }//GEN-LAST:event_tabelaOSMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -336,9 +680,17 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbCnpj;
     private javax.swing.JLabel lbCpf;
+    private javax.swing.JLabel lbNomeCliente;
+    private javax.swing.JLabel lbNomeComercial;
     private javax.swing.JLabel lbNumOs;
     private javax.swing.JLabel lbPlaca;
     private javax.swing.JLabel lbTitulo;
@@ -355,9 +707,23 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelNumOs;
     private javax.swing.JPanel panelPlaca;
     private javax.swing.JPanel panelTitulo;
+    private javax.swing.JRadioButton radioFisicaCPF;
+    private javax.swing.JRadioButton radioFisicaNome;
+    private javax.swing.JRadioButton radioJuridicaCNPJ;
+    private javax.swing.JRadioButton radioJuridicaNome;
+    private javax.swing.JTable tabelaCarro;
+    private javax.swing.JTable tabelaFisica;
+    private javax.swing.JTable tabelaJuridica;
+    private javax.swing.JTable tabelaOS;
     private javax.swing.JFormattedTextField tfFisicaCpf;
+    private javax.swing.JTextField tfFisicaNome;
     private javax.swing.JFormattedTextField tfJuridicaCnpj;
+    private javax.swing.JTextField tfJuridicaNome;
     private javax.swing.JTextField tfNumOs;
     private javax.swing.JTextField tfPlaca;
     // End of variables declaration//GEN-END:variables
+    private List<PessoaFisica> clientesFisicos;
+    private List<PessoaJuridica> clientesJuridicos;
+    private List<Carro> carrosLista;
+    private List<OrdemDeServico> osLista;
 }

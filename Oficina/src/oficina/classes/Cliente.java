@@ -32,6 +32,9 @@ public class Cliente {
        this.setEmail(email);
        this.setObservacoes(observacoes);
    }
+   public Cliente(){
+       
+   }
     public String getRua() {
         return rua;
     }

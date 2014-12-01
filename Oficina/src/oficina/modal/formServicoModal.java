@@ -7,6 +7,7 @@ package oficina.modal;
 
 import oficina.classes.Servico;
 import java.util.Random;
+import oficina.classes.ConexaoBd;
 
 /**
  *
@@ -22,7 +23,8 @@ public class formServicoModal extends javax.swing.JDialog
     {
         super(parent, modal);
         initComponents();
-        
+        ConexaoBd bd = new ConexaoBd();
+        bd.preencheCbMecanico(cbMecanico);
         this.setLocationRelativeTo(null);
     }
     
@@ -34,7 +36,7 @@ public class formServicoModal extends javax.swing.JDialog
         taDescr.setText(s.getNomeServico());
         tfPreco.setText(s.getPreco());
         tfPreco.setEnabled(false);
-        tfMecanico.setText(s.getNomeMecanico());
+        
         
         this.setLocationRelativeTo(null);
     }
@@ -65,7 +67,7 @@ public class formServicoModal extends javax.swing.JDialog
         tfPreco = new javax.swing.JFormattedTextField();
         panelMecanico = new javax.swing.JPanel();
         lbMecanico = new javax.swing.JLabel();
-        tfMecanico = new javax.swing.JTextField();
+        cbMecanico = new javax.swing.JComboBox();
         panelAlerta = new javax.swing.JPanel();
         lbAlerta = new javax.swing.JLabel();
         panelBotoes = new javax.swing.JPanel();
@@ -106,8 +108,7 @@ public class formServicoModal extends javax.swing.JDialog
         lbMecanico.setText("Mecânico:");
         panelMecanico.add(lbMecanico);
 
-        tfMecanico.setColumns(20);
-        panelMecanico.add(tfMecanico);
+        panelMecanico.add(cbMecanico);
 
         panelCriarServiço.add(panelMecanico);
 
@@ -134,8 +135,7 @@ public class formServicoModal extends javax.swing.JDialog
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
         if(taDescr.getText().length() == 0 
-                || tfPreco.getText().length() == 0 
-                || tfMecanico.getText().length() == 0)
+                || tfPreco.getText().length() == 0)
         {
             lbAlerta.setText("Todos os campos devem ser preenchidos.");
         }
@@ -144,7 +144,9 @@ public class formServicoModal extends javax.swing.JDialog
         {
             serv = new Servico(taDescr.getText(), 
                     tfPreco.getText(), 
-                    tfMecanico.getText());
+                    cbMecanico.getSelectedItem().toString());
+            ConexaoBd bd = new ConexaoBd();
+            serv.setCodMecanico(bd.buscaCodMecanico(serv.getNomeMecanico()));
             
             setVisible(false);
             this.dispose();
@@ -206,6 +208,7 @@ public class formServicoModal extends javax.swing.JDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btOk;
+    private javax.swing.JComboBox cbMecanico;
     private javax.swing.Box.Filler filler4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbAlerta;
@@ -219,7 +222,6 @@ public class formServicoModal extends javax.swing.JDialog
     private javax.swing.JPanel panelMecanico;
     private javax.swing.JPanel panelPreco;
     private javax.swing.JTextArea taDescr;
-    private javax.swing.JTextField tfMecanico;
     private javax.swing.JFormattedTextField tfPreco;
     // End of variables declaration//GEN-END:variables
     private Servico serv;

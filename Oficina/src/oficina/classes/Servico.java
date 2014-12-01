@@ -14,6 +14,7 @@ public class Servico
     private String nomeServico;
     private String preco;
     private String nomeMecanico;
+    private int codMecanico;
     
     public Servico(String nomeServico, String preco, String nomeMecanico)
     {
@@ -74,5 +75,13 @@ public class Servico
     public void setNomeMecanico(String nomeMecanico)
     {
         this.nomeMecanico = nomeMecanico;
+    }
+    
+    public int getCodMecanico(){
+        return this.codMecanico;
+    }
+    
+    public void setCodMecanico(int codMecanico){
+        this.codMecanico = codMecanico;
     }
 }
