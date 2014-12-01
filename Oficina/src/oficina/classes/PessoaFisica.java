@@ -28,6 +28,9 @@ public class PessoaFisica extends Cliente {
         
       
     }
+    public PessoaFisica(){
+    }
+    
 
     public String getNome() {
         return nome;

@@ -17,13 +17,16 @@ public class OrdemDeServico
 {
     private int    codigoOs;
     private String placaCarro;
-    private String codCliente;
+    private String cpfCliente;
+    private int codCliente;
     private String kmEntrada, kmSaida;
     private String dataInicio, dataFim;
     private String horaInicio, horaFim;
     private String tipo;
     private String estado;
+    private String valorTotal;
     public List<Servico> servicos;
+    
     
     public OrdemDeServico()
     {
@@ -121,11 +124,7 @@ public class OrdemDeServico
     /**
      * @param tipo the tipo to set
      */
-    public void setTipo(int tipo)
-    {
-        this.setTipo(tipo);
-    }
-
+  
     /**
      * @return the estado
      */
@@ -169,17 +168,17 @@ public class OrdemDeServico
     /**
      * @return the codCliente
      */
-    public String getCodCliente()
+    public String getCpfCliente()
     {
-        return codCliente;
+        return cpfCliente;
     }
 
     /**
      * @param codCliente the codCliente to set
      */
-    public void setCodCliente(String codCliente)
+    public void setCpfCliente(String cpfCliente)
     {
-        this.codCliente = codCliente;
+        this.cpfCliente = cpfCliente;
     }
 
     /**
@@ -212,5 +211,21 @@ public class OrdemDeServico
     public void setDataFim(String dataFim)
     {
         this.dataFim = dataFim;
+    }
+    
+    public String getValorTotal(){
+        return this.valorTotal;
+    }
+    
+    public void setValorTotal(String valorTotal){
+        this.valorTotal = valorTotal;
+    }
+    
+    public int getCodigoCliente(){
+        return this.codCliente;
+    }
+    
+    public void setCodCliente(int codigo){
+        this.codCliente = codigo;
     }
 }

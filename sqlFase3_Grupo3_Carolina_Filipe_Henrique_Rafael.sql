@@ -13,7 +13,12 @@ CREATE TABLE Cliente(
 	codCadastrante smallint NOT NULL,
 	pessoaFisica boolean NOT NULL,
 	emailCliente varchar(150),
-	enderecoCliente varchar(250) NOT NULL,
+	ruaCliente varchar(265) NOT NULL,
+	numeroCliente smallint NOT NULL,
+	bairroCliente varchar(35) NOT NULL,
+	cidadeCliente varchar(35) NOT NULL,
+	estadoCliente varchar(2) NOT NULL,
+	CEPCliente varchar(9) NOT NULL,
 	observacoesCliente text,
 
 	FOREIGN KEY (codCadastrante) REFERENCES Funcionario(codFuncionario) ON UPDATE CASCADE
@@ -95,12 +100,13 @@ CREATE TABLE OrdemDeServico(
 );
 
 CREATE TABLE ServicoFuncionarioOS(
+	codServico smallserial NOT NULL,
 	codOS smallint NOT NULL,
 	codFuncionario smallint NOT NULL,
 	DataServico date NOT NULL DEFAULT CURRENT_DATE,
 	DescricaoServico text,
 	
-	PRIMARY KEY (codOS , codFuncionario),
+	PRIMARY KEY (codServico,codOS , codFuncionario),
 	FOREIGN KEY (codOS) REFERENCES OrdemDeServico(codOS) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (codFuncionario) REFERENCES Funcionario(codFuncionario)	ON UPDATE CASCADE
 );
@@ -119,25 +125,25 @@ insert into Funcionario(nomeFuncionario,atendente) VALUES ('Jonas', false);
 insert into Funcionario(nomeFuncionario,atendente) VALUES ('Gustavo', false);
 
 --Insercao Clientes
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(1,true, 'urameshi@urameshi.com', 'rua alem - 23 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(1,true, 'urameshi@urameshi.com', 'rua alem',23,'bairro Nobre','Sao Paulo','SP', '02121-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(2,true, 'appa@avatar.com', 'Rua do Ar - 456 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(2,true, 'appa@avatar.com', 'Rua do Ar',456,'bairro Nobre','Sao Paulo','SP', '02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(1,true, 'aantonio@gmail.com', 'rua estados unidos - 567 - Sorocaba - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(1,true, 'aantonio@gmail.com', 'rua estados unidos',567,'bairro Nobre','Sorocaba','SP', '01010-010');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(4,true, 'biaVascon@outlook.com', 'rua sao paulo - 12 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(4,true, 'biaVascon@outlook.com', 'rua sao paulo',12,'bairro Nobre','Sao Paulo','SP', '11111-111');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(3,true, 'quixote@sanchopanca.com', 'Av Aragao  - 13 - Sorocaba - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(3,true, 'quixote@sanchopanca.com', 'Av Aragao',13 ,'bairro Nobre','Sorocaba','SP','02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(1,false, 'xgh@xgh.com', 'rua das gambiarras - 45 - Rio de Janeiro - RJ');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(1,false, 'xgh@xgh.com', 'rua das gambiarras',45,'bairro Nobre','Rio de Janeiro','RJ','02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(4,false, 'rango@namesa.com', 'rua satisfacao - 21 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(4,false, 'rango@namesa.com', 'rua satisfacao',21,'bairro Nobre','Sao Paulo','SP','02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(5,false, 'acme@looneytunes.com', 'Av Frangolino - 122 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(5,false, 'acme@looneytunes.com', 'Av Frangolino',122,'bairro Nobre','Sao Paulo','SP', '02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(5,false, 'anabella@canabella.com', 'rua dos sonos - 11 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(5,false, 'anabella@canabella.com', 'rua dos sonos',11,'bairro Nobre','Sao Paulo','SP','02222-020');
 
-insert into Cliente(codCadastrante, pessoaFisica, emailCliente, enderecoCliente) values(1,false, 'mbyte@1mb.com', 'rua dos consertos - 51 - Sao Paulo - SP');
+insert into Cliente(codCadastrante, pessoaFisica, emailCliente, ruaCliente, numeroCliente,bairroCliente, cidadeCliente,estadoCliente, CEPCliente ) values(1,false, 'mbyte@1mb.com', 'rua dos consertos',51,'bairro Nobre','Sao Paulo','SP','02222-020');
 
 --Insercao PessoaFisica
 insert into PessoaFisica(codCliente,nome, rg, cpf, telefoneResidencial, celular) values(1, 'Yusuke Urameshi', '32.344.312-1', '321.545.794-34','(15)2345-2225', '(15)99224-2325');
@@ -213,11 +219,11 @@ insert into Carro(placaCarro, codModelo, codDono, codCadastrante, cor, ano) valu
 
 --Insercao TipoEstadoOS
 
-insert into TipoEstadoOS(nomeEstado) values('Aberta');
+insert into TipoEstadoOS(nomeEstado) values('Pendente para orcamento');
 insert into TipoEstadoOS(nomeEstado) values('Pendente para aprovação');
-insert into TipoEstadoOS(nomeEstado) values('Pendente para atendimento');
-insert into TipoEstadoOS(nomeEstado) values('Atendida');
-insert into TipoEstadoOS(nomeEstado) values('Faturada');
+insert into TipoEstadoOS(nomeEstado) values('Pendente para pagamento');
+insert into TipoEstadoOS(nomeEstado) values('Finalizada');
+insert into TipoEstadoOS(nomeEstado) values('Cancelada');
 
 --Insercao Ordem de Servico
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(4,'UFA-2122',1,1,234.8, 200);

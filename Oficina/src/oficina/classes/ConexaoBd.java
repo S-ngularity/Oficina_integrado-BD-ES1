@@ -11,7 +11,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import oficina.classes.Carro;
@@ -73,6 +76,42 @@ public class ConexaoBd {
          
         return false;
     }
+    public int buscaCodMecanico(String nomeFuncionario){
+        String selectMecanico = "SELECT codFuncionario FROM Funcionario where nomeFuncionario ='"+nomeFuncionario+"';";
+        ResultSet busca;
+        
+         try{
+           st.execute(selectMecanico);
+           busca =  st.getResultSet();
+           
+           if(busca.next())
+           {              
+             return busca.getInt(1);
+              
+           }
+
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCodMecanico: "+e.getMessage());
+       }
+         return -1;
+    }
+    public void preencheCbMecanico(JComboBox cbMecanico){
+        String selectMecanico = "SELECT nomeFuncionario FROM Funcionario where atendente = FALSE;";
+        ResultSet busca;
+        try{
+           st.execute(selectMecanico);
+           busca =  st.getResultSet();
+           
+           while(busca.next())
+           {              
+             cbMecanico.addItem(busca.getString(1));
+              
+           }
+
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em preencheCBMecanico: "+e.getMessage());
+       }
+    }
     
     //======================CARRO=========================================================
     // to do: resolver codDono x cpf/cnpj - como conseguir codDono?
@@ -97,8 +136,24 @@ public class ConexaoBd {
          }
        }
     
-    public Carro buscaCarro(String placa){
-        String selectCarro = "SELECT * FROM Carro where placaCarro='"+placa+"';";
+    //preenche objeto carro com resultado de busca no BD
+     private void preencheCarro(Carro carro, ResultSet busca) throws SQLException{
+               carro.setPlaca(busca.getString(1));
+               carro.setCodModelo(busca.getInt(2));
+               carro.setNomeModelo(busca.getString(10));
+               carro.setCor(busca.getString(5));
+               carro.setAno(busca.getString(6));
+               carro.setObservacoes(busca.getString(7));
+               carro.setCodDono(busca.getInt(3));
+               carro.setCodMarca(busca.getInt(9));
+               carro.setNomeMarca(busca.getString(12));
+               
+               
+     }
+    
+    public Carro buscaCarroPlaca(String placa){
+        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca, Cliente where placaCarro='"+placa+
+                "' AND modelo.codModelo = Carro.codModelo AND marca.codMarca = modelo.codMarca AND Carro.codDono = Cliente.codCliente"+";";
         ResultSet rs;
         
         try{
@@ -110,21 +165,72 @@ public class ConexaoBd {
            else
            {
                Carro carro = new Carro();
-               carro.setPlaca(rs.getString(1));
-               carro.setCodModelo(rs.getInt(2));
-               carro.setCor(rs.getString(3));
-               carro.setAno(rs.getString(4));
-               carro.setObservacoes(rs.getString(5));
-               carro.setCodDono(rs.getInt(6));
+               preencheCarro(carro, rs);
+               carro.setCPFDono(buscaNomeCliente( rs.getBoolean(15), ""+carro.getCodDono()));
                return carro;
            }
         
       }
       catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarro: "+e.getMessage());
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroPlaca: "+e.getMessage());
        }
       
       return null;
+    }
+    
+    public List<Carro> buscaCarroClienteFisico(PessoaFisica cliente){
+        List<Carro> carros = new ArrayList<Carro>();
+        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca, where "
+                + "modelo.codModelo = Carro.codModelo AND marca.codMarca = modelo.codMarca AND Carro.codDono ="
+                + cliente.getCodCliente() + ";";
+        ResultSet busca;
+        Carro carro;
+        
+        try{
+           st.execute(selectCarro);
+           busca =  st.getResultSet();
+           
+           while(busca.next())
+           {
+               carro = new Carro();
+               preencheCarro(carro, busca);
+               carro.setCPFDono(cliente.getCPF());
+               carros.add(carro);
+           }
+                  
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroCliente: "+e.getMessage());
+       }
+        
+        return carros;
+    }
+    public List<Carro> buscaCarroClienteJuridico(PessoaJuridica cliente){
+        List<Carro> carros = new ArrayList<Carro>();
+        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca, where "
+                + "modelo.codModelo = Carro.codModelo AND marca.codMarca = modelo.codMarca AND Carro.codDono ="
+                + cliente.getCodCliente() + ";";
+        ResultSet busca;
+        Carro carro;
+        
+        try{
+           st.execute(selectCarro);
+           busca =  st.getResultSet();
+           
+           while(busca.next())
+           {
+               carro = new Carro();
+               preencheCarro(carro, busca);
+               carro.setCPFDono(cliente.getCNPJ());
+               carros.add(carro);
+           }
+                  
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroCliente: "+e.getMessage());
+       }
+        
+        return carros;
     }
     
     public void preencheCbMarca(JComboBox marca){
@@ -197,34 +303,150 @@ public class ConexaoBd {
      //=======================ORDEM DE SERVICO ============================================
 
     public void cadastraOS(OrdemDeServico os, Funcionario funcionario){
-       String insertOS = "INSERT INTO OrdemDeServico(placaCarroOS, codClienteOS, codFuncionarioOS,"
-               + "codEstadoOS,kmEntradaOS,kmSaidaOS) VALUES(";
-       DecimalFormat df = new DecimalFormat("0.##");
+       String insertOS = "INSERT INTO OrdemDeServico(placaCarroOS, codClienteOS, codAtendenteOS,"
+               + "codEstadoOS,kmEntradaOS, valorTotalOS) VALUES(";
+      ResultSet codOS;
        
        insertOS += "'" + os.getPlacaCarro() +"',";
-       insertOS += os.getCodCliente() + ",";
-       insertOS += "'" + funcionario.getCodFuncionario() + "',";
-       insertOS += os.getEstado() +",";
+       insertOS += os.getCodigoCliente() + ",";
+       insertOS += funcionario.getCodFuncionario() + ",";
+       insertOS += 1 +",";
        insertOS += os.getKmEntrada()+",";
-       insertOS += os.getKmEntrada()+");";//+",";
-       //insertOS += os.getValorTotal() +");";
+       insertOS += os.getValorTotal() +");";
 
         try{
-           st.execute(insertOS);
+           st.execute(insertOS, Statement.RETURN_GENERATED_KEYS);
+           codOS = st.getGeneratedKeys();
+           codOS.next();
+           os.setCodigoOs(codOS.getInt(1));
+           CadastraServico(os);
+            
+            
+           
 
        }catch(SQLException e){
            JOptionPane.showMessageDialog(null, "Erro ao executar insercao em OS: "+e.getMessage());
        }
        
     }
+    public void CadastraServico(OrdemDeServico os){
+        String insertServico = "INSERT INTO ServicoFuncionarioOS(codOS, codFuncionario,descricaoServico) VALUES(";
+        Iterator<Servico> it = os.servicos.iterator();
+        
+        while(it.hasNext())
+        {
+            String insertServico2 = "";
+            Servico temp = it.next();
+            insertServico2 += os.getCodigoOs() + ",";
+            insertServico2 += temp.getCodMecanico() + ",";
+            insertServico2 += "'"+temp.getNomeServico()+"');";
+
+            try{
+               st.execute(insertServico+insertServico2);
+
+           }catch(SQLException e){
+               JOptionPane.showMessageDialog(null, "Erro ao executar insercao em Servicos: "+e.getMessage());
+           }
+        }
+    }
+    private String buscaNomeestadoOS(int codestado){
+        String selectEstado = "SELECT nomeEstado FROM TipoEstadoOS where codEstadoOS = "+codestado+";";
+        ResultSet busca;
+        try{
+           st.execute(selectEstado);
+           busca = st.getResultSet();
+           if(busca.next())
+           {
+               return busca.getString(1);
+           }
+    }catch(SQLException e){
+      JOptionPane.showMessageDialog(null, "Erro ao executar buscaNomeEstadoOS: "+e.getMessage());
+    }
+        return null;
+    }
+    //Preenche objeto OS com dados buscados no BD
+    private void preencheOS(OrdemDeServico os, ResultSet busca) throws SQLException{
+        os.setCodigoOs(busca.getInt(1));
+        os.setCpfCliente(busca.getString(2));
+        os.setPlacaCarro(busca.getString(3));
+        os.setKmEntrada(busca.getString(6));
+        os.setKmSaida(busca.getString(7));
+        os.setDataInicio(busca.getString(9));
+        os.setDataFim(busca.getString(10));
+        os.setValorTotal(busca.getString(8));
+        os.setTipo(buscaNomeestadoOS(busca.getInt(5)));
+    }
+    public OrdemDeServico buscaOSCod(int CodigoOS){
+        String selectOS = "SELECT * from OrdemDeServico where codOS = "+ CodigoOS + ";";
+        OrdemDeServico os;
+        ResultSet busca;
+        
+        try{
+           st.execute(selectOS);
+           busca = st.getResultSet();
+           if(busca.next())
+           {
+               os = new OrdemDeServico();
+               preencheOS(os, busca);
+               return os;
+           }
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar buscaOSCod: "+e.getMessage());
+       }
+        return null;
+    }
+    public List<OrdemDeServico> buscaOSPlaca(String placa){
+        String selectOS = "SELECT * FROM OrdemDeServico where placaCarroOS = '"+ placa + "';";
+        OrdemDeServico os;
+        List<OrdemDeServico> osList = new ArrayList<OrdemDeServico>();
+        ResultSet busca;
+        
+        try{
+           st.execute(selectOS);
+           busca = st.getResultSet();
+           while(busca.next())
+           {
+               os = new OrdemDeServico();
+               preencheOS(os, busca);
+               osList.add(os);
+               return osList;
+           }
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar buscaOSPlaca: "+e.getMessage());
+       }
+        return osList;
+    }
+    
+    public List<OrdemDeServico> buscaOSCliente(int codCliente){
+        String selectOS = "SELECT * FROM OrdemDeServico where codClienteOS = "+ codCliente + ";";
+        OrdemDeServico os;
+        List<OrdemDeServico> osList = new ArrayList<OrdemDeServico>();
+        ResultSet busca;
+        
+        try{
+           st.execute(selectOS);
+           busca = st.getResultSet();
+           while(busca.next())
+           {
+               os = new OrdemDeServico();
+               preencheOS(os, busca);
+               osList.add(os);
+               return osList;
+           }
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar buscaOSCliente: "+e.getMessage());
+       }
+        return osList;
+    }
+    
     
     //==========================CLIENTE=========================================
     
     private int cadastraCliente(Cliente cliente,Funcionario funcionario, boolean fisica){
         ResultSet keyset;
 
-        String insertCliente = "INSERT INTO Cliente(codCadastrante,pessoaFisica, enderecoCliente,"
-                + "emailCliente, observacoesCliente) VALUES(";
+        String insertCliente = "INSERT INTO Cliente(codCadastrante,pessoaFisica, ruaCliente,"
+                + "numeroCliente, bairroCliente, cidadeCliente, estadoCliente, CEPCliente, emailCliente, observacoesCliente) VALUES(";
         
         insertCliente +=funcionario.getCodFuncionario()+ ",";
         if(fisica)
@@ -232,12 +454,12 @@ public class ConexaoBd {
         else
             insertCliente += "FALSE,";        
         
-        insertCliente += "'" + cliente.getRua() + " ";
-        insertCliente += cliente.getEndNumero() + " - ";
-        insertCliente +=  cliente.getBairro() + " - ";
-        insertCliente +=  cliente.getCidade() + " - ";
-        insertCliente += cliente.getEstado() + " - ";
-        insertCliente +=  cliente.getCEP()+ "',";
+        insertCliente += "'" + cliente.getRua() + "',";
+        insertCliente += cliente.getEndNumero() + ",";
+        insertCliente +=  "'"+cliente.getBairro() + "',";
+        insertCliente +=  "'"+cliente.getCidade() + "', ";
+        insertCliente += "'"+cliente.getEstado() + "',";
+        insertCliente +=  "'"+cliente.getCEP()+ "',";
         insertCliente += "'" + cliente.getEmail()+"',";
         insertCliente += "'" + cliente.getObservacoes() + "');";
         
@@ -298,9 +520,9 @@ public class ConexaoBd {
         ResultSet busca;
         
         if(PessoaFisica)
-            selectCliente = "SELECT nome * FROM PessoaFisisca where codCliente="+codCliente+";";
+            selectCliente = "SELECT nome FROM PessoaFisica where codCliente="+codCliente+";";
         else
-            selectCliente = "SELECT nomeFantasia * FROM PessoaJuridica where codCliente="+codCliente+";";
+            selectCliente = "SELECT nomeFantasia FROM PessoaJuridica where codCliente="+codCliente+";";
         
         try{
            st.execute(selectCliente);
@@ -344,6 +566,79 @@ public class ConexaoBd {
        
     }
     
+    //Preenche objeto cliente com resultado de busca em PessoaFisica por nome ou cpf
+    private void preenchePessoaFisica(PessoaFisica cliente, ResultSet busca) throws SQLException{
+        
+            
+               cliente.setCodCliente(busca.getInt(1));
+               cliente.setRG(busca.getString(2));
+               cliente.setCPF(busca.getString(3));
+               cliente.setNome(busca.getString(4));
+               cliente.setNumResidencial(busca.getString(5));
+               cliente.setNumCelular(busca.getString(6));
+               cliente.setEmail(busca.getString(10));
+               cliente.setRua(busca.getString(11));
+               cliente.setEndNumero(busca.getString(12));
+               cliente.setBairro(busca.getString(13));
+               cliente.setCidade(busca.getString(14));
+               cliente.setEstado(busca.getString(15));
+               cliente.setCEP(busca.getString(16));
+               cliente.setObservacoes(busca.getString(17));
+    }
+    public PessoaFisica buscaPessoaFisicaCPF(String cpf){
+        String selectCliente = "SELECT  * FROM PessoaFisica, Cliente where cpf='"+cpf+"'"
+                + " AND Cliente.codCliente = PessoaFisica.codCliente;";
+        PessoaFisica cliente = new PessoaFisica();
+        ResultSet busca;
+        try{
+           st.execute(selectCliente);
+           busca =  st.getResultSet();
+           
+           if(busca.next())
+           {
+               preenchePessoaFisica(cliente, busca);
+               return cliente;
+               
+           }
+         
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaPessoaFisicaCPF: "+e.getMessage());
+       }
+        
+        return null;
+    }
+    public List<PessoaFisica> buscaPessoaFisicaNome(String nome){
+        List<PessoaFisica> listaCliente =new ArrayList<PessoaFisica>();
+        nome = nome.toUpperCase();
+         String selectCliente = "SELECT  * FROM PessoaFisica, Cliente where upper(PessoaFisica.nome) Like '%"+nome+"%'"
+                + " AND Cliente.codCliente = PessoaFisica.codCliente ORDER BY PessoaFisica.nome;";
+         
+         PessoaFisica cliente = new PessoaFisica();
+        ResultSet busca;
+        try{
+           st.execute(selectCliente);
+           busca =  st.getResultSet();
+           
+           while(busca.next())
+           {
+               preenchePessoaFisica(cliente, busca);
+               listaCliente.add(cliente);
+               cliente = new PessoaFisica();
+               
+           }
+         
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaPessoaFisicaNome: "+e.getMessage());
+       }
+        
+        return listaCliente;
+    }
+    
+    
+    
+    
     //================================PESSOA JURIDICA==============================================
     
     public void cadastraPessoaJuridica(PessoaJuridica cliente, Funcionario funcionario){
@@ -364,6 +659,74 @@ public class ConexaoBd {
            JOptionPane.showMessageDialog(null, "Erro ao executar insercao em pessoa Juridica: "+e.getMessage());
        }
         
+    }
+    //Preenche objeto cliente com resultado de busca em PessoaFisica por nome ou cpf
+    private void preenchePessoaJuridica(PessoaJuridica cliente, ResultSet busca) throws SQLException{
+        
+               cliente.setCodCliente(busca.getInt(1));
+               cliente.setCNPJ(busca.getString(2));
+               cliente.setNomeFantasia(busca.getString(3));
+               cliente.setTelefoneComercial(busca.getString(4));
+               cliente.setFAX(busca.getString(5));
+               cliente.setEmail(busca.getString(9));
+               cliente.setRua(busca.getString(10));
+               cliente.setEndNumero(busca.getString(11));
+               cliente.setBairro(busca.getString(12));
+               cliente.setCidade(busca.getString(13));
+               cliente.setEstado(busca.getString(14));
+               cliente.setCEP(busca.getString(15));
+               cliente.setObservacoes(busca.getString(16));
+    }
+    
+    public PessoaJuridica buscaPessoaJuridicaCNPJ(String cnpj){
+        String selectCliente = "SELECT  * FROM PessoaJuridica, Cliente where cnpj='"+cnpj+"'"
+                + "AND Cliente.codCliente = PessoaJuridica.codCliente;";
+        PessoaJuridica cliente = new PessoaJuridica();
+        ResultSet busca;
+        try{
+           st.execute(selectCliente);
+           busca =  st.getResultSet();
+           
+           if(busca.next())
+           {
+               preenchePessoaJuridica(cliente, busca);
+               return cliente;
+               
+           }
+         
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaPessoaJuridicaCPF: "+e.getMessage());
+       }
+        
+        return null;
+    }
+    
+    public List<PessoaJuridica> buscaPessoaJuridicaNome(String nome){
+        List<PessoaJuridica> listaCliente =new ArrayList<PessoaJuridica>();
+        nome = nome.toUpperCase();
+         String selectCliente = "SELECT  * FROM PessoaJuridica, Cliente where upper(PessoaJuridica.nomeFantasia) Like '%"+nome+"%'"
+                + "AND Cliente.codCliente = PessoaJuridica.codCliente;";
+         
+         PessoaJuridica cliente = new PessoaJuridica();
+        ResultSet busca;
+        try{
+           st.execute(selectCliente);
+           busca =  st.getResultSet();
+           
+           while(busca.next())
+           {
+               preenchePessoaJuridica(cliente, busca);
+               listaCliente.add(cliente);
+               cliente = new PessoaJuridica();
+           }
+         
+      }
+      catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaPessoaJuridicaNome: "+e.getMessage());
+       }
+        
+        return listaCliente;
     }
         
     //============================== BUSCAS ====================================================================
@@ -388,7 +751,7 @@ public class ConexaoBd {
         return -1;
     }
     
-    public String buscaNomeDono(String codDono){
+    public String buscaNomeDono(int codDono){
         String selectCliente = "SELECT pessoaFisica FROM Cliente where codCliente="+codDono+";";
         ResultSet busca;
         

@@ -6,6 +6,8 @@
 package oficina.modal;
 
 import java.util.Random;
+import oficina.classes.Carro;
+import oficina.classes.ConexaoBd;
 
 /**
  *
@@ -30,6 +32,9 @@ public class buscaCarroModal extends javax.swing.JDialog
     {
         setVisible(true);
         return placa;
+    }
+    public int codCliente(){
+        return this.codDono;
     }
 
     /**
@@ -127,12 +132,15 @@ public class buscaCarroModal extends javax.swing.JDialog
 
     private void btBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPlacaActionPerformed
         Random generator = new Random();
-        
+        ConexaoBd bd = new ConexaoBd();
+        Carro c;
         if(tfPlaca.getText().length() == 8)
         {
-            if(generator.nextBoolean() == true)
+            c = bd.buscaCarroPlaca(tfPlaca.getText());
+            if(c != null)
             {
                 placa = tfPlaca.getText().toString(); // mudar para VisualizaPessoaFisica(pfBusca) quando pfBusca conseguir ser retorno de busca no BD
+                codDono = c.getCodDono();
                 setVisible(false);
                 this.dispose();
             }
@@ -221,4 +229,5 @@ public class buscaCarroModal extends javax.swing.JDialog
     private javax.swing.JTextField tfPlaca;
     // End of variables declaration//GEN-END:variables
     private String placa;
+    private int codDono;
 }

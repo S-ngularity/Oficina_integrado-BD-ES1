@@ -26,6 +26,9 @@ public class PessoaJuridica extends Cliente {
         this.setTelefoneComercial(telefone);
         this.setFAX(FAX);
     }
+    public PessoaJuridica(){
+        
+    }
     public String getCNPJ() {
         return CNPJ;
     }

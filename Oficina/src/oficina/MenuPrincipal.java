@@ -6,10 +6,6 @@
 package oficina;
 
 import java.awt.CardLayout;
-import oficina.unused.FormBusca;
-import oficina.unused.FormPessoa;
-import oficina.unused.FormOs;
-import oficina.unused.FormCarro;
 import oficina.classes.Funcionario;
 import java.awt.Color;
 import java.util.Random;
