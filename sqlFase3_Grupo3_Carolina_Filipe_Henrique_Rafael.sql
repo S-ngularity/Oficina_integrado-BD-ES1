@@ -219,8 +219,9 @@ insert into Carro(placaCarro, codModelo, codDono, codCadastrante, cor, ano) valu
 
 --Insercao TipoEstadoOS
 
-insert into TipoEstadoOS(nomeEstado) values('Pendente para orcamento');
+insert into TipoEstadoOS(nomeEstado) values('Pendente para orçamento');
 insert into TipoEstadoOS(nomeEstado) values('Pendente para aprovação');
+insert into TipoEstadoOS(nomeEstado) values('Em atendimento');
 insert into TipoEstadoOS(nomeEstado) values('Pendente para pagamento');
 insert into TipoEstadoOS(nomeEstado) values('Finalizada');
 insert into TipoEstadoOS(nomeEstado) values('Cancelada');
@@ -233,7 +234,7 @@ insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstado
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(1,'COC-1237',1,5,122.11, 0);
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',1,5,127.11, 3000);
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(1,'COC-1237',2,5,122.11, 500);
-insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',3,5,127.11, 1500);
+insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',3,6,127.11, 1500);
 
 --Insercao ServicoFuncionarioOS -- eletrica, balanceamento, alinhamento, bateria, vidracaria, 
 insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(1,2,'eletrica');
