@@ -5,6 +5,13 @@
  */
 package oficina.visualizar;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import oficina.classes.Carro;
+import oficina.classes.ConexaoBd;
+import oficina.classes.OrdemDeServico;
 import oficina.classes.PessoaFisica;
 
 /**
@@ -19,6 +26,7 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
     public VisualizaPessoaFisica(PessoaFisica cliente) {
                 
         initComponents();
+        this.cliente = cliente;
         this.setLocationRelativeTo(null);
         lbNomeText.setText(cliente.getNome());
         lbRgText.setText(cliente.getRG());
@@ -83,6 +91,10 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
         taObsText = new javax.swing.JTextArea();
         panelBotoes = new javax.swing.JPanel();
         btSair = new javax.swing.JButton();
+        btCarro = new javax.swing.JButton();
+        btOS = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualização de Pessoa Física");
@@ -193,7 +205,45 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
         });
         panelBotoes.add(btSair);
 
+        btCarro.setText("Ver Carros");
+        btCarro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCarroActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(btCarro);
+
+        btOS.setText("Ver OS");
+        btOS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btOSActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(btOS);
+
         getContentPane().add(panelBotoes);
+
+        tabela.setBackground(new java.awt.Color(204, 204, 204));
+        tabela.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tabela.setShowHorizontalLines(false);
+        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelaMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tabela);
+
+        getContentPane().add(jScrollPane2);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -202,10 +252,79 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btSairActionPerformed
 
+    private void btCarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCarroActionPerformed
+        // TODO add your handling code here:
+            tabelaOS = false;
+            Carro carro;
+            ConexaoBd bd = new ConexaoBd();
+            try {this.carrosLista.clear();}catch(RuntimeException e){this.carrosLista = new ArrayList<Carro>();}
+            this.carrosLista = bd.buscaCarroClienteFisico(this.cliente);
+            Iterator<Carro> it = this.carrosLista.iterator();
+            DefaultTableModel model = (DefaultTableModel)tabela.getModel(); 
+            model.setNumRows(0);
+            model.setColumnCount(3);
+            model.setColumnIdentifiers(new Object[]{"Placa", "Modelo", "Ano"});
+            Class<?> col_class = tabela.getColumnClass(0);
+            tabela.setDefaultEditor(col_class, null);
+            col_class = tabela.getColumnClass(1);
+            tabela.setDefaultEditor(col_class, null);
+            col_class = tabela.getColumnClass(2);
+            tabela.setDefaultEditor(col_class, null);
+            while(it.hasNext())
+            {   carro = it.next();
+                model.addRow(new Object[]{carro.getPlaca(), carro.getNomeModelo(), carro.getAno()});
+            }
+    }//GEN-LAST:event_btCarroActionPerformed
+
+    private void btOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOSActionPerformed
+        // TODO add your handling code here:
+            tabelaOS = true;
+            OrdemDeServico os;
+            ConexaoBd bd = new ConexaoBd();
+            try {this.osLista.clear();}catch(RuntimeException e){this.osLista = new ArrayList<OrdemDeServico>();}
+            this.osLista = bd.buscaOSCliente(cliente.getCodCliente());
+            Iterator<OrdemDeServico> it = this.osLista.iterator();
+            DefaultTableModel model = (DefaultTableModel)tabela.getModel(); 
+            model.setNumRows(0);
+            model.setColumnCount(3);
+            model.setColumnIdentifiers(new Object[]{"Numero da OS", "Carro", "Estado"});
+            Class<?> col_class = tabela.getColumnClass(0);
+            tabela.setDefaultEditor(col_class, null);
+            col_class = tabela.getColumnClass(1);
+            tabela.setDefaultEditor(col_class, null);
+            col_class = tabela.getColumnClass(2);
+            tabela.setDefaultEditor(col_class, null);
+            while(it.hasNext())
+            {   os = it.next();
+                model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(), os.getEstado()});
+            }
+    }//GEN-LAST:event_btOSActionPerformed
+
+    private void tabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount() == 2)
+        {
+            if(tabelaOS)
+            {
+                OrdemDeServico os = this.osLista.get(tabela.getSelectedRow());
+                  new VisualizaOs(os).setVisible(true);
+            }
+        
+            else
+            {
+                Carro carro = this.carrosLista.get(tabela.getSelectedRow());
+               new VisualizaCarro(carro).setVisible(true);
+            }
+        }
+    }//GEN-LAST:event_tabelaMouseClicked
+
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCarro;
+    private javax.swing.JButton btOS;
     private javax.swing.JButton btSair;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbBairro;
     private javax.swing.JLabel lbBairroText;
     private javax.swing.JLabel lbCelular;
@@ -243,5 +362,10 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
     private javax.swing.JPanel panelInfoRow8;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JTextArea taObsText;
+    private javax.swing.JTable tabela;
     // End of variables declaration//GEN-END:variables
+    private List<Carro> carrosLista;
+    private List<OrdemDeServico> osLista;
+    private PessoaFisica cliente;
+    boolean tabelaOS;
 }
