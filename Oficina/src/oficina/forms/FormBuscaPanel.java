@@ -45,9 +45,11 @@ public class FormBuscaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
-        panelTitulo = new javax.swing.JPanel();
+        buttonGroupFisica = new javax.swing.ButtonGroup();
+        buttonGroupJuridica = new javax.swing.ButtonGroup();
         lbTitulo = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelBuscaOs = new javax.swing.JPanel();
@@ -73,11 +75,9 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCpf = new javax.swing.JPanel();
         radioFisicaCPF = new javax.swing.JRadioButton();
-        lbCpf = new javax.swing.JLabel();
         tfFisicaCpf = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         radioFisicaNome = new javax.swing.JRadioButton();
-        lbNomeCliente = new javax.swing.JLabel();
         tfFisicaNome = new javax.swing.JTextField();
         panelBuscarCpf = new javax.swing.JPanel();
         btCpf = new javax.swing.JButton();
@@ -87,28 +87,21 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCnpj = new javax.swing.JPanel();
         radioJuridicaCNPJ = new javax.swing.JRadioButton();
-        lbCnpj = new javax.swing.JLabel();
         tfJuridicaCnpj = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         radioJuridicaNome = new javax.swing.JRadioButton();
-        lbNomeComercial = new javax.swing.JLabel();
         tfJuridicaNome = new javax.swing.JTextField();
         panelBuscarCnpj = new javax.swing.JPanel();
         btBuscarCnpj = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaJuridica = new javax.swing.JTable();
 
-        setPreferredSize(new java.awt.Dimension(450, 300));
+        setPreferredSize(new java.awt.Dimension(550, 550));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
-
-        panelTitulo.setMinimumSize(new java.awt.Dimension(80, 0));
-        panelTitulo.setPreferredSize(new java.awt.Dimension(400, 0));
 
         lbTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbTitulo.setText("Busca");
-        panelTitulo.add(lbTitulo);
-
-        add(panelTitulo);
+        add(lbTitulo);
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(400, 200));
 
@@ -124,8 +117,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaOs.add(panelNumOs);
 
         btBuscarOs.setText("Buscar");
-        btBuscarOs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btBuscarOs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btBuscarOsActionPerformed(evt);
             }
         });
@@ -134,36 +129,43 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaOs.add(panelBuscarOs);
 
+        tabelaOS.setAutoCreateRowSorter(true);
         tabelaOS.setBackground(new java.awt.Color(204, 204, 204));
         tabelaOS.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+            new Object [][]
+            {
+
             },
-            new String [] {
+            new String []
+            {
                 "Numero da OS", "Carro", "Estado"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         tabelaOS.setShowHorizontalLines(false);
-        tabelaOS.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabelaOS.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaOSMouseClicked(evt);
             }
         });
@@ -180,8 +182,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelPlaca.add(lbPlaca);
 
         tfPlaca.setColumns(10);
-        tfPlaca.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfPlaca.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfPlacaKeyTyped(evt);
             }
         });
@@ -190,8 +194,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaCarro.add(panelPlaca);
 
         btBuscarPlaca.setText("Buscar");
-        btBuscarPlaca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btBuscarPlaca.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btBuscarPlacaActionPerformed(evt);
             }
         });
@@ -199,36 +205,43 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaCarro.add(panelBuscarPlaca);
 
+        tabelaCarro.setAutoCreateRowSorter(true);
         tabelaCarro.setBackground(new java.awt.Color(204, 204, 204));
         tabelaCarro.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+            new Object [][]
+            {
+
             },
-            new String [] {
+            new String []
+            {
                 "Placa", "Modelo", "Cliente"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         tabelaCarro.setShowHorizontalLines(false);
-        tabelaCarro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabelaCarro.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaCarroMouseClicked(evt);
             }
         });
@@ -241,30 +254,36 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaFisica.setLayout(new javax.swing.BoxLayout(panelBuscaFisica, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaFisica.add(filler3);
 
-        radioFisicaCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonGroupFisica.add(radioFisicaCPF);
+        radioFisicaCPF.setSelected(true);
+        radioFisicaCPF.setText("CPF do Cliente: ");
+        radioFisicaCPF.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 radioFisicaCPFActionPerformed(evt);
             }
         });
         panelCpf.add(radioFisicaCPF);
 
-        lbCpf.setText("CPF do Cliente: ");
-        panelCpf.add(lbCpf);
-
         tfFisicaCpf.setColumns(14);
-        try {
+        try
+        {
             tfFisicaCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaCpf.setText("000.000.000-00");
         tfFisicaCpf.setToolTipText("");
-        tfFisicaCpf.setEnabled(false);
-        tfFisicaCpf.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaCpf.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCpfFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCpfFocusLost(evt);
             }
         });
@@ -272,15 +291,16 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(panelCpf);
 
-        radioFisicaNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonGroupFisica.add(radioFisicaNome);
+        radioFisicaNome.setText("Nome do Cliente: ");
+        radioFisicaNome.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 radioFisicaNomeActionPerformed(evt);
             }
         });
         jPanel1.add(radioFisicaNome);
-
-        lbNomeCliente.setText("Nome do Cliente: ");
-        jPanel1.add(lbNomeCliente);
 
         tfFisicaNome.setColumns(15);
         tfFisicaNome.setEnabled(false);
@@ -289,8 +309,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaFisica.add(jPanel1);
 
         btCpf.setText("Buscar");
-        btCpf.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCpf.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCpfActionPerformed(evt);
             }
         });
@@ -298,36 +320,43 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(panelBuscarCpf);
 
+        tabelaFisica.setAutoCreateRowSorter(true);
         tabelaFisica.setBackground(new java.awt.Color(204, 204, 204));
         tabelaFisica.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+            new Object [][]
+            {
+
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Cliente", "CPF/CNPJ"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
-        tabelaFisica.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tabelaFisica.setShowHorizontalLines(false);
-        tabelaFisica.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabelaFisica.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaFisicaMouseClicked(evt);
             }
         });
@@ -340,29 +369,35 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaJuridica.setLayout(new javax.swing.BoxLayout(panelBuscaJuridica, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaJuridica.add(filler5);
 
-        radioJuridicaCNPJ.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonGroupJuridica.add(radioJuridicaCNPJ);
+        radioJuridicaCNPJ.setSelected(true);
+        radioJuridicaCNPJ.setText("CNPJ da Empresa: ");
+        radioJuridicaCNPJ.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 radioJuridicaCNPJActionPerformed(evt);
             }
         });
         panelCnpj.add(radioJuridicaCNPJ);
 
-        lbCnpj.setText("CNPJ da Empresa: ");
-        panelCnpj.add(lbCnpj);
-
         tfJuridicaCnpj.setColumns(20);
-        try {
+        try
+        {
             tfJuridicaCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfJuridicaCnpj.setText("00.000.000/0000-00");
-        tfJuridicaCnpj.setEnabled(false);
-        tfJuridicaCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfJuridicaCnpj.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCnpjFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCnpjFocusLost(evt);
             }
         });
@@ -370,15 +405,16 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(panelCnpj);
 
-        radioJuridicaNome.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        buttonGroupJuridica.add(radioJuridicaNome);
+        radioJuridicaNome.setText("Nome Comercial: ");
+        radioJuridicaNome.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 radioJuridicaNomeActionPerformed(evt);
             }
         });
         jPanel2.add(radioJuridicaNome);
-
-        lbNomeComercial.setText("Nome Comercial: ");
-        jPanel2.add(lbNomeComercial);
 
         tfJuridicaNome.setColumns(19);
         tfJuridicaNome.setEnabled(false);
@@ -387,8 +423,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         panelBuscaJuridica.add(jPanel2);
 
         btBuscarCnpj.setText("Buscar");
-        btBuscarCnpj.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btBuscarCnpj.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btBuscarCnpjActionPerformed(evt);
             }
         });
@@ -396,35 +434,43 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(panelBuscarCnpj);
 
+        tabelaJuridica.setAutoCreateRowSorter(true);
         tabelaJuridica.setBackground(new java.awt.Color(204, 204, 204));
         tabelaJuridica.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+            new Object [][]
+            {
+
             },
-            new String [] {
+            new String []
+            {
                 "ID", "Empresa", "CNPJ"
             }
-        ) {
-            Class[] types = new Class [] {
+        )
+        {
+            Class[] types = new Class []
+            {
                 java.lang.Integer.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false
             };
 
-            public Class getColumnClass(int columnIndex) {
+            public Class getColumnClass(int columnIndex)
+            {
                 return types [columnIndex];
             }
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         tabelaJuridica.setShowHorizontalLines(false);
-        tabelaJuridica.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabelaJuridica.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaJuridicaMouseClicked(evt);
             }
         });
@@ -449,6 +495,9 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getTipo()});
             this.osLista.add(os);
         }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
     }//GEN-LAST:event_btBuscarOsActionPerformed
 
     private void tfPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPlacaKeyTyped
@@ -492,14 +541,14 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         {    model.addRow(new Object[]{carro.getPlaca(), carro.getNomeModelo(), bd.buscaNomeDono(carro.getCodDono())});
             this.carrosLista.add(carro);
         }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
     }//GEN-LAST:event_btBuscarPlacaActionPerformed
 
     private void tfFisicaCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFisicaCpfFocusGained
-        if("000.000.000-00".equals(tfFisicaCpf.getText()))
-        {
-            tfFisicaCpf.setText(null);
-            tfFisicaCpf.setForeground(Color.black);
-        }
+        tfFisicaCpf.setText(null);
+        tfFisicaCpf.setForeground(Color.black);
     }//GEN-LAST:event_tfFisicaCpfFocusGained
 
     private void tfFisicaCpfFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFisicaCpfFocusLost
@@ -524,6 +573,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
                  this.clientesFisicos.add(cliente);
             }
 
+            else
+                JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
         }
         if(radioFisicaNome.isSelected())
         {
@@ -545,11 +596,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btCpfActionPerformed
 
     private void tfJuridicaCnpjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfJuridicaCnpjFocusGained
-        if("00.000.000/0000-00".equals(tfJuridicaCnpj.getText()))
-        {
-            tfJuridicaCnpj.setText(null);
-            tfJuridicaCnpj.setForeground(Color.black);
-        }
+        tfJuridicaCnpj.setText(null);
+        tfJuridicaCnpj.setForeground(Color.black);
     }//GEN-LAST:event_tfJuridicaCnpjFocusGained
 
     private void tfJuridicaCnpjFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfJuridicaCnpjFocusLost
@@ -577,8 +625,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
                 this.clientesJuridicos.add(cliente);
             }
             
-            
-
+            else
+                JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
         }
         if(radioJuridicaNome.isSelected())
         {
@@ -600,8 +648,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btBuscarCnpjActionPerformed
 
     private void radioFisicaCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFisicaCPFActionPerformed
-        // TODO add your handling code here:
-        radioFisicaNome.setSelected(false);
         tfFisicaCpf.setEnabled(true);
         tfFisicaNome.setEnabled(false);
         
@@ -609,8 +655,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_radioFisicaCPFActionPerformed
 
     private void radioFisicaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioFisicaNomeActionPerformed
-        // TODO add your handling code here:
-        radioFisicaCPF.setSelected(false);
         tfFisicaCpf.setEnabled(false);
         tfFisicaNome.setEnabled(true);
     }//GEN-LAST:event_radioFisicaNomeActionPerformed
@@ -626,15 +670,11 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tabelaFisicaMouseClicked
 
     private void radioJuridicaCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioJuridicaCNPJActionPerformed
-        // TODO add your handling code here:
-         radioJuridicaNome.setSelected(false);
         tfJuridicaCnpj.setEnabled(true);
         tfJuridicaNome.setEnabled(false);
     }//GEN-LAST:event_radioJuridicaCNPJActionPerformed
 
     private void radioJuridicaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioJuridicaNomeActionPerformed
-        // TODO add your handling code here:
-        radioJuridicaCNPJ.setSelected(false);
         tfJuridicaCnpj.setEnabled(false);
         tfJuridicaNome.setEnabled(true);
     }//GEN-LAST:event_radioJuridicaNomeActionPerformed
@@ -675,6 +715,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JButton btBuscarOs;
     private javax.swing.JButton btBuscarPlaca;
     private javax.swing.JButton btCpf;
+    private javax.swing.ButtonGroup buttonGroupFisica;
+    private javax.swing.ButtonGroup buttonGroupJuridica;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
@@ -687,10 +729,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lbCnpj;
-    private javax.swing.JLabel lbCpf;
-    private javax.swing.JLabel lbNomeCliente;
-    private javax.swing.JLabel lbNomeComercial;
     private javax.swing.JLabel lbNumOs;
     private javax.swing.JLabel lbPlaca;
     private javax.swing.JLabel lbTitulo;
@@ -706,7 +744,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelCpf;
     private javax.swing.JPanel panelNumOs;
     private javax.swing.JPanel panelPlaca;
-    private javax.swing.JPanel panelTitulo;
     private javax.swing.JRadioButton radioFisicaCPF;
     private javax.swing.JRadioButton radioFisicaNome;
     private javax.swing.JRadioButton radioJuridicaCNPJ;

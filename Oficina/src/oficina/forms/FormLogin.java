@@ -73,6 +73,13 @@ public class FormLogin extends javax.swing.JFrame {
         panelUsuarioRow1.add(lbCodUsuario);
 
         tfCodUsuario.setColumns(20);
+        tfCodUsuario.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                tfCodUsuarioActionPerformed(evt);
+            }
+        });
         panelUsuarioRow1.add(tfCodUsuario);
 
         getContentPane().add(panelUsuarioRow1);
@@ -88,6 +95,13 @@ public class FormLogin extends javax.swing.JFrame {
         panelSenhaRow1.add(lbSenha);
 
         jpSenha.setColumns(20);
+        jpSenha.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jpSenhaActionPerformed(evt);
+            }
+        });
         panelSenhaRow1.add(jpSenha);
 
         getContentPane().add(panelSenhaRow1);
@@ -135,6 +149,16 @@ public class FormLogin extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(null, "Erro ao Autenticar.");
     }//GEN-LAST:event_btEntrarActionPerformed
+
+    private void tfCodUsuarioActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_tfCodUsuarioActionPerformed
+    {//GEN-HEADEREND:event_tfCodUsuarioActionPerformed
+        btEntrarActionPerformed(evt);
+    }//GEN-LAST:event_tfCodUsuarioActionPerformed
+
+    private void jpSenhaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jpSenhaActionPerformed
+    {//GEN-HEADEREND:event_jpSenhaActionPerformed
+        btEntrarActionPerformed(evt);
+    }//GEN-LAST:event_jpSenhaActionPerformed
 
     /**
      * @param args the command line arguments
