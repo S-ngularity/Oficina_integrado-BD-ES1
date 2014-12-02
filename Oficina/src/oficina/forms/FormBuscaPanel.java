@@ -122,7 +122,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaOs.add(panelNumOs);
 
-        btBuscarOs.setText("Procurar");
+        btBuscarOs.setText("Buscar");
         btBuscarOs.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -199,7 +199,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaCarro.add(panelPlaca);
 
-        btBuscarPlaca.setText("Procurar");
+        btBuscarPlaca.setText("Buscar");
         btBuscarPlaca.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -314,7 +314,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(jPanel1);
 
-        btCpf.setText("Procurar");
+        btCpf.setText("Buscar");
         btCpf.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -428,7 +428,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(jPanel2);
 
-        btBuscarCnpj.setText("Procurar");
+        btBuscarCnpj.setText("Buscar");
         btBuscarCnpj.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -492,20 +492,28 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarOsActionPerformed
-        OrdemDeServico os;
         try {this.osLista.clear();}catch(RuntimeException e){this.osLista = new ArrayList<OrdemDeServico>();}
-        ConexaoBd bd = new ConexaoBd();
-        os = bd.buscaOSCod(Integer.parseInt(tfNumOs.getText()));
         DefaultTableModel model = (DefaultTableModel)tabelaOS.getModel();
         model.setNumRows(0);
         
-        if(os != null)
-        {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getEstado()});
-            this.osLista.add(os);
+        if(tfNumOs.getText().length() < 1)
+        {
+            JOptionPane.showMessageDialog(null, "É necessário informar um número de Ordem de Serviço.");
         }
-        
         else
-            JOptionPane.showMessageDialog(null, "Número da Ordem de Serviço não é válido.");
+        {
+            OrdemDeServico os;
+            ConexaoBd bd = new ConexaoBd();
+            os = bd.buscaOSCod(Integer.parseInt(tfNumOs.getText()));
+
+            if(os != null)
+            {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getEstado()});
+                this.osLista.add(os);
+            }
+
+            else
+                JOptionPane.showMessageDialog(null, "Número da Ordem de Serviço não é válido.");
+        }
     }//GEN-LAST:event_btBuscarOsActionPerformed
 
     private void tfPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPlacaKeyTyped
@@ -539,19 +547,29 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tfPlacaKeyTyped
 
     private void btBuscarPlacaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarPlacaActionPerformed
-        Carro carro;
         try {this.carrosLista.clear();}catch(RuntimeException e){this.carrosLista = new ArrayList<Carro>();}
-        ConexaoBd bd = new ConexaoBd();
-        carro = bd.buscaCarroPlaca(tfPlaca.getText());
         DefaultTableModel model = (DefaultTableModel)tabelaCarro.getModel(); 
         model.setNumRows(0);
-        if(carro != null)
-        {    model.addRow(new Object[]{carro.getPlaca(), carro.getNomeModelo(), bd.buscaNomeDono(carro.getCodDono())});
-            this.carrosLista.add(carro);
+        
+        if(tfPlaca.getText().length() < 1)
+        {
+            JOptionPane.showMessageDialog(null, "É necessário informar uma placa.");
         }
         
         else
-            JOptionPane.showMessageDialog(null, "Placa não é válida ou não está cadastrada.");
+        {
+            Carro carro;
+            ConexaoBd bd = new ConexaoBd();
+            carro = bd.buscaCarroPlaca(tfPlaca.getText());
+
+            if(carro != null)
+            {    model.addRow(new Object[]{carro.getPlaca(), carro.getNomeModelo(), bd.buscaNomeDono(carro.getCodDono())});
+                this.carrosLista.add(carro);
+            }
+
+            else
+                JOptionPane.showMessageDialog(null, "Placa não é válida ou não está cadastrada.");
+        }
     }//GEN-LAST:event_btBuscarPlacaActionPerformed
 
     private void tfFisicaCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFisicaCpfFocusGained
