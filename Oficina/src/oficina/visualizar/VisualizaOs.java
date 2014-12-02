@@ -8,6 +8,7 @@ package oficina.visualizar;
 import oficina.classes.OrdemDeServico;
 import oficina.classes.Servico;
 import javax.swing.DefaultListModel;
+import oficina.classes.ConexaoBd;
 import oficina.modal.formServicoModal;
 
 /**
@@ -22,13 +23,20 @@ public class VisualizaOs extends javax.swing.JFrame
     public VisualizaOs(OrdemDeServico os, boolean podeAlterar)
     {
         this.osTemp = os;
+        this.podeAlterar = podeAlterar;
         
         initComponents();
+                
+        //if(osTemp.getEstado() == "Finalizada")
+        //    btAlterar.setEnabled(false);
+        
         if(podeAlterar)
         {
             lbTitulo.setText("Alterar Ordem de Serviço");
+            cboxEstado.setEnabled(true);
+            btAlterar.setText("Confirmar");
         }
-        
+                
         this.setLocationRelativeTo(null);
         this.atualizaVisualizacao();
         valor = 0;
@@ -41,7 +49,7 @@ public class VisualizaOs extends javax.swing.JFrame
         
         for(int i = 0; i < d.getSize(); i++)
         {
-            valor += Double.parseDouble(((Servico) d.elementAt(i)).getPreco());
+            valor += Integer.parseInt(((Servico) d.elementAt(i)).getPreco());
         }
     }
 
@@ -50,10 +58,10 @@ public class VisualizaOs extends javax.swing.JFrame
         lbPlacaText.setText(osTemp.getPlacaCarro());
         lbCodClienteText.setText(osTemp.getCpfCliente());
         lblKmEntradaText.setText(osTemp.getKmEntrada());
-        lbKmSaidaText.setText(osTemp.getKmSaida());
+        tfKmSaidaText.setText(osTemp.getKmSaida());
         lbDataInicioText.setText(osTemp.getDataInicio());
         lbDataFimText.setText(osTemp.getDataFim());
-        lbEstadoText.setText(osTemp.getEstado());
+        cboxEstado.setSelectedItem(osTemp.getEstado());
         
         DefaultListModel d = (DefaultListModel) lServicos.getModel();
 
@@ -64,18 +72,22 @@ public class VisualizaOs extends javax.swing.JFrame
         
         calcularTotal();
         lbValorText.setText("R$ " + Integer.toString(valor) + ",00");
+        
+        osTemp.setEstado(cboxEstado.getSelectedItem().toString());
+        if(osTemp.getEstado() == "Finalizada")
+            btAlterar.setEnabled(false);
     }
     
-    void closeOp()
+    void closeOp(boolean alterar)
     {
         osTemp.setCodigoOs(Integer.parseInt(lbCodigoOsText.getText()));
         osTemp.setPlacaCarro(lbPlacaText.getText());
         osTemp.setCpfCliente(lbCodClienteText.getText());
         osTemp.setKmEntrada(lblKmEntradaText.getText());
-        osTemp.setKmSaida(lbKmSaidaText.getText());
+        osTemp.setKmSaida(tfKmSaidaText.getText());
         osTemp.setDataInicio(lbDataInicioText.getText());
         osTemp.setDataFim(lbDataFimText.getText());
-        osTemp.setEstado(lbEstadoText.getText());
+        osTemp.setEstado(cboxEstado.getSelectedItem().toString());
 
         DefaultListModel d = (DefaultListModel) lServicos.getModel();
 
@@ -83,9 +95,20 @@ public class VisualizaOs extends javax.swing.JFrame
         {
             osTemp.servicos.add((Servico) d.remove(0));
         };
-        
+                
         setVisible(false);
         this.dispose();
+        
+        if(podeAlterar == false && alterar == true)
+        {
+            new VisualizaOs(osTemp, true).setVisible(true);
+        }
+            
+        else if(podeAlterar == true && alterar == true)
+        {
+            ConexaoBd bd = new ConexaoBd();
+            bd.atualizarOS(osTemp);
+        }
         
         //FormOs novo = new FormOs(osTemp); // GAMBETA PRA ALTERAÇÃO NA OS POR AQUI VOLTAR PRA FORMOS
         //novo.setVisible(true);
@@ -116,13 +139,13 @@ public class VisualizaOs extends javax.swing.JFrame
         lbCodClienteText = new javax.swing.JLabel();
         panelEstado = new javax.swing.JPanel();
         lbEstado = new javax.swing.JLabel();
-        lbEstadoText = new javax.swing.JLabel();
+        cboxEstado = new javax.swing.JComboBox();
         panelKmEntrada = new javax.swing.JPanel();
         lblKmEntrada = new javax.swing.JLabel();
         lblKmEntradaText = new javax.swing.JLabel();
         panelKmSaida = new javax.swing.JPanel();
         lbKmSaida = new javax.swing.JLabel();
-        lbKmSaidaText = new javax.swing.JLabel();
+        tfKmSaidaText = new javax.swing.JTextField();
         panelDataInicio = new javax.swing.JPanel();
         lbDataInicio = new javax.swing.JLabel();
         lbDataInicioText = new javax.swing.JLabel();
@@ -139,8 +162,9 @@ public class VisualizaOs extends javax.swing.JFrame
         panelValor = new javax.swing.JPanel();
         lbValor = new javax.swing.JLabel();
         lbValorText = new javax.swing.JLabel();
-        panelBotoes1 = new javax.swing.JPanel();
-        btSair1 = new javax.swing.JButton();
+        panelBotoes = new javax.swing.JPanel();
+        btAlterar = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Visualização de Ordem de Serviço");
@@ -167,7 +191,7 @@ public class VisualizaOs extends javax.swing.JFrame
         panelCodigoOs.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbCodigoOs.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbCodigoOs.setText("Código:");
+        lbCodigoOs.setText("Número da OS:");
         panelCodigoOs.add(lbCodigoOs);
 
         lbCodigoOsText.setPreferredSize(new java.awt.Dimension(180, 14));
@@ -189,7 +213,7 @@ public class VisualizaOs extends javax.swing.JFrame
         panelCliente.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbCodCliente.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lbCodCliente.setText("CPF/CNPJ:");
+        lbCodCliente.setText("Nome:");
         panelCliente.add(lbCodCliente);
 
         lbCodClienteText.setPreferredSize(new java.awt.Dimension(180, 14));
@@ -203,8 +227,16 @@ public class VisualizaOs extends javax.swing.JFrame
         lbEstado.setText("Estado:");
         panelEstado.add(lbEstado);
 
-        lbEstadoText.setPreferredSize(new java.awt.Dimension(180, 14));
-        panelEstado.add(lbEstadoText);
+        cboxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pendente para orçamento", "Pendente para aprovação", "Em atendimento", "Pendente para pagamento", "Finalizada", "Cancelada" }));
+        cboxEstado.setEnabled(false);
+        cboxEstado.addItemListener(new java.awt.event.ItemListener()
+        {
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
+                cboxEstadoItemStateChanged(evt);
+            }
+        });
+        panelEstado.add(cboxEstado);
 
         panelInfos.add(panelEstado);
 
@@ -225,8 +257,9 @@ public class VisualizaOs extends javax.swing.JFrame
         lbKmSaida.setText("Quilometragem de Saída:");
         panelKmSaida.add(lbKmSaida);
 
-        lbKmSaidaText.setPreferredSize(new java.awt.Dimension(109, 15));
-        panelKmSaida.add(lbKmSaidaText);
+        tfKmSaidaText.setColumns(8);
+        tfKmSaidaText.setEnabled(false);
+        panelKmSaida.add(tfKmSaidaText);
 
         panelInfos.add(panelKmSaida);
 
@@ -317,17 +350,27 @@ public class VisualizaOs extends javax.swing.JFrame
 
         getContentPane().add(jPanel1);
 
-        btSair1.setText("Sair");
-        btSair1.addActionListener(new java.awt.event.ActionListener()
+        btAlterar.setText("Alterar");
+        btAlterar.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                btSair1ActionPerformed(evt);
+                btAlterarActionPerformed(evt);
             }
         });
-        panelBotoes1.add(btSair1);
+        panelBotoes.add(btAlterar);
 
-        getContentPane().add(panelBotoes1);
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btSairActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(btSair);
+
+        getContentPane().add(panelBotoes);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -363,7 +406,7 @@ public class VisualizaOs extends javax.swing.JFrame
             {
                 Servico servicoTempAntes = (Servico) lServicos.getModel().getElementAt(index);
                 
-                formServicoModal dlg = new formServicoModal(this, true, servicoTempAntes);
+                formServicoModal dlg = new formServicoModal(this, true, servicoTempAntes, false);
                 Servico servicoTempDepois = dlg.showDiag();
 
                 if(servicoTempDepois != null)
@@ -375,18 +418,39 @@ public class VisualizaOs extends javax.swing.JFrame
         }
     }//GEN-LAST:event_lServicosMouseClicked
 
-    private void btSair1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSair1ActionPerformed
-        closeOp();
-    }//GEN-LAST:event_btSair1ActionPerformed
+    private void btSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSairActionPerformed
+        closeOp(false);
+    }//GEN-LAST:event_btSairActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        closeOp();
+        closeOp(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void cboxEstadoItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_cboxEstadoItemStateChanged
+    {//GEN-HEADEREND:event_cboxEstadoItemStateChanged
+        if(cboxEstado.getSelectedItem().toString() == "Finalizada" && podeAlterar == true)
+        {
+            tfKmSaidaText.setEnabled(true);
+        }
+        
+        else
+        {
+            tfKmSaidaText.setEnabled(false);
+            tfKmSaidaText.setText("");
+        }
+    }//GEN-LAST:event_cboxEstadoItemStateChanged
+
+    private void btAlterarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btAlterarActionPerformed
+    {//GEN-HEADEREND:event_btAlterarActionPerformed
+        closeOp(true);
+    }//GEN-LAST:event_btAlterarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdd;
+    private javax.swing.JButton btAlterar;
     private javax.swing.JButton btDel;
-    private javax.swing.JButton btSair1;
+    private javax.swing.JButton btSair;
+    private javax.swing.JComboBox cboxEstado;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList lServicos;
@@ -399,9 +463,7 @@ public class VisualizaOs extends javax.swing.JFrame
     private javax.swing.JLabel lbDataInicio;
     private javax.swing.JLabel lbDataInicioText;
     private javax.swing.JLabel lbEstado;
-    private javax.swing.JLabel lbEstadoText;
     private javax.swing.JLabel lbKmSaida;
-    private javax.swing.JLabel lbKmSaidaText;
     private javax.swing.JLabel lbPlaca;
     private javax.swing.JLabel lbPlacaText;
     private javax.swing.JLabel lbTitulo;
@@ -409,7 +471,7 @@ public class VisualizaOs extends javax.swing.JFrame
     private javax.swing.JLabel lbValorText;
     private javax.swing.JLabel lblKmEntrada;
     private javax.swing.JLabel lblKmEntradaText;
-    private javax.swing.JPanel panelBotoes1;
+    private javax.swing.JPanel panelBotoes;
     private javax.swing.JPanel panelBotoesLista;
     private javax.swing.JPanel panelCliente;
     private javax.swing.JPanel panelCodigoOs;
@@ -424,7 +486,9 @@ public class VisualizaOs extends javax.swing.JFrame
     private javax.swing.JPanel panelServicos;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JPanel panelValor;
+    private javax.swing.JTextField tfKmSaidaText;
     // End of variables declaration//GEN-END:variables
     private OrdemDeServico osTemp;
     private int valor;
+    private boolean podeAlterar;
 }

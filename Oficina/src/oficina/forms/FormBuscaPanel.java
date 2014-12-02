@@ -61,9 +61,10 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         tfNumOs = new javax.swing.JTextField();
         panelBuscarOs = new javax.swing.JPanel();
         btBuscarOs = new javax.swing.JButton();
-        jSeparator1 = new javax.swing.JSeparator();
         jScrollPane4 = new javax.swing.JScrollPane();
         tabelaOS = new javax.swing.JTable();
+        btVisualizarOSHolder = new javax.swing.JPanel();
+        btVisualizarOS = new javax.swing.JButton();
         panelBuscaCarro = new javax.swing.JPanel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelPlaca = new javax.swing.JPanel();
@@ -73,6 +74,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         btBuscarPlaca = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaCarro = new javax.swing.JTable();
+        btVisualizarCarroHolder = new javax.swing.JPanel();
+        btVisualizarCarro = new javax.swing.JButton();
         panelBuscaFisica = new javax.swing.JPanel();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCpf = new javax.swing.JPanel();
@@ -85,6 +88,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         btCpf = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabelaFisica = new javax.swing.JTable();
+        btVisualizarFisicaHolder = new javax.swing.JPanel();
+        btVisualizarFisica = new javax.swing.JButton();
         panelBuscaJuridica = new javax.swing.JPanel();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         panelCnpj = new javax.swing.JPanel();
@@ -97,6 +102,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         btBuscarCnpj = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabelaJuridica = new javax.swing.JTable();
+        btVisualizarJuridicaHolder = new javax.swing.JPanel();
+        btVisualizarJuridica = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(550, 550));
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
@@ -131,7 +138,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
             }
         });
         panelBuscarOs.add(btBuscarOs);
-        panelBuscarOs.add(jSeparator1);
 
         panelBuscaOs.add(panelBuscarOs);
 
@@ -178,6 +184,18 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         jScrollPane4.setViewportView(tabelaOS);
 
         panelBuscaOs.add(jScrollPane4);
+
+        btVisualizarOS.setText("Visualizar Selecionada");
+        btVisualizarOS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btVisualizarOSActionPerformed(evt);
+            }
+        });
+        btVisualizarOSHolder.add(btVisualizarOS);
+
+        panelBuscaOs.add(btVisualizarOSHolder);
 
         jTabbedPane1.addTab("Ordem de Serviço", panelBuscaOs);
 
@@ -254,6 +272,18 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         jScrollPane3.setViewportView(tabelaCarro);
 
         panelBuscaCarro.add(jScrollPane3);
+
+        btVisualizarCarro.setText("Visualizar Selecionada");
+        btVisualizarCarro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btVisualizarCarroActionPerformed(evt);
+            }
+        });
+        btVisualizarCarroHolder.add(btVisualizarCarro);
+
+        panelBuscaCarro.add(btVisualizarCarroHolder);
 
         jTabbedPane1.addTab("Carro", panelBuscaCarro);
 
@@ -370,6 +400,18 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(jScrollPane1);
 
+        btVisualizarFisica.setText("Visualizar Selecionada");
+        btVisualizarFisica.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btVisualizarFisicaActionPerformed(evt);
+            }
+        });
+        btVisualizarFisicaHolder.add(btVisualizarFisica);
+
+        panelBuscaFisica.add(btVisualizarFisicaHolder);
+
         jTabbedPane1.addTab("Pessoa Física", panelBuscaFisica);
 
         panelBuscaJuridica.setLayout(new javax.swing.BoxLayout(panelBuscaJuridica, javax.swing.BoxLayout.PAGE_AXIS));
@@ -483,6 +525,18 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tabelaJuridica);
 
         panelBuscaJuridica.add(jScrollPane2);
+
+        btVisualizarJuridica.setText("Visualizar Selecionada");
+        btVisualizarJuridica.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btVisualizarJuridicaActionPerformed(evt);
+            }
+        });
+        btVisualizarJuridicaHolder.add(btVisualizarJuridica);
+
+        panelBuscaJuridica.add(btVisualizarJuridicaHolder);
 
         jTabbedPane1.addTab("Pessoa Jurídica", panelBuscaJuridica);
 
@@ -690,7 +744,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         if(evt.getClickCount() == 2)
         {
             PessoaFisica cliente = this.clientesFisicos.get(tabelaFisica.getSelectedRow());
-           new VisualizaPessoaFisica(cliente).setVisible(true);
+             new VisualizaPessoaFisica(cliente).setVisible(true);
            
         }
     }//GEN-LAST:event_tabelaFisicaMouseClicked
@@ -709,7 +763,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(evt.getClickCount() == 2)
         {
-            PessoaJuridica cliente = this.clientesJuridicos.get(tabelaJuridica.getSelectedRow());
+           PessoaJuridica cliente = this.clientesJuridicos.get(tabelaJuridica.getSelectedRow());
            new VisualizaPessoaJuridica(cliente).setVisible(true);
            
         }
@@ -720,7 +774,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         if(evt.getClickCount() == 2)
         {
             Carro carro = this.carrosLista.get(tabelaCarro.getSelectedRow());
-           new VisualizaCarro(carro).setVisible(true);
+            new VisualizaCarro(carro).setVisible(true);
            
         }
     }//GEN-LAST:event_tabelaCarroMouseClicked
@@ -734,12 +788,68 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tabelaOSMouseClicked
 
+    private void btVisualizarOSActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btVisualizarOSActionPerformed
+    {//GEN-HEADEREND:event_btVisualizarOSActionPerformed
+        if(tabelaOS.getSelectedRow() >= 0)
+        {   
+            OrdemDeServico os = this.osLista.get(tabelaOS.getSelectedRow());
+            new VisualizaOs(os, false).setVisible(true);
+        }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Selecione uma Ordem de Serviço para visualizar.");
+    }//GEN-LAST:event_btVisualizarOSActionPerformed
+
+    private void btVisualizarJuridicaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btVisualizarJuridicaActionPerformed
+    {//GEN-HEADEREND:event_btVisualizarJuridicaActionPerformed
+        if(tabelaJuridica.getSelectedRow() >= 0)
+        {   
+            PessoaJuridica cliente = this.clientesJuridicos.get(tabelaJuridica.getSelectedRow());
+            new VisualizaPessoaJuridica(cliente).setVisible(true);
+        }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Selecione uma Pessoa Jurídica para visualizar.");
+    }//GEN-LAST:event_btVisualizarJuridicaActionPerformed
+
+    private void btVisualizarFisicaActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btVisualizarFisicaActionPerformed
+    {//GEN-HEADEREND:event_btVisualizarFisicaActionPerformed
+        if(tabelaFisica.getSelectedRow() >= 0)
+        {   
+            PessoaFisica cliente = this.clientesFisicos.get(tabelaFisica.getSelectedRow());
+            new VisualizaPessoaFisica(cliente).setVisible(true);
+        }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Selecione uma Pessoa Física para visualizar.");
+    }//GEN-LAST:event_btVisualizarFisicaActionPerformed
+
+    private void btVisualizarCarroActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btVisualizarCarroActionPerformed
+    {//GEN-HEADEREND:event_btVisualizarCarroActionPerformed
+        if(tabelaCarro.getSelectedRow() >= 0)
+        {   
+            Carro carro = this.carrosLista.get(tabelaCarro.getSelectedRow());
+            new VisualizaCarro(carro).setVisible(true);
+        }
+        
+        else
+            JOptionPane.showMessageDialog(null, "Selecione um Carro para visualizar.");
+    }//GEN-LAST:event_btVisualizarCarroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscarCnpj;
     private javax.swing.JButton btBuscarOs;
     private javax.swing.JButton btBuscarPlaca;
     private javax.swing.JButton btCpf;
+    private javax.swing.JButton btVisualizarCarro;
+    private javax.swing.JPanel btVisualizarCarroHolder;
+    private javax.swing.JButton btVisualizarFisica;
+    private javax.swing.JPanel btVisualizarFisicaHolder;
+    private javax.swing.JButton btVisualizarJuridica;
+    private javax.swing.JPanel btVisualizarJuridicaHolder;
+    private javax.swing.JButton btVisualizarOS;
+    private javax.swing.JPanel btVisualizarOSHolder;
     private javax.swing.ButtonGroup buttonGroupFisica;
     private javax.swing.ButtonGroup buttonGroupJuridica;
     private javax.swing.Box.Filler filler2;
@@ -752,7 +862,6 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbNumOs;
     private javax.swing.JLabel lbPlaca;
@@ -789,5 +898,5 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private List<PessoaFisica> clientesFisicos;
     private List<PessoaJuridica> clientesJuridicos;
     private List<Carro> carrosLista;
-    private List<OrdemDeServico> osLista;
+    private ArrayList<OrdemDeServico> osLista;
 }

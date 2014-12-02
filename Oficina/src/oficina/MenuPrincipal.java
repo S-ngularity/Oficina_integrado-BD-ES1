@@ -43,6 +43,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panelMid.setPreferredSize(panelPessoa.getPreferredSize());
         this.pack();
+        panelMid.setPreferredSize(panelBusca.getPreferredSize());
         
         this.setLocationRelativeTo(null);
         lbNomeText.setText(funcionario.getNome());
@@ -288,7 +289,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             //backup.realizarBackup();
             backup.run();
             
-            JOptionPane.showMessageDialog(null, "Backup realizado.");
+            JOptionPane.showMessageDialog(null, "Backup realizado. Arquivo será escrito ao final da execução do programa.");
         }
         else {
             JOptionPane.showMessageDialog(null, "Backup não realizado");

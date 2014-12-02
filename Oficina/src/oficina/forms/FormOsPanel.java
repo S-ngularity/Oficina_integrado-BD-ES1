@@ -293,7 +293,7 @@ public class FormOsPanel extends javax.swing.JPanel {
             {
                 Servico servicoTempAntes = (Servico) lServicos.getModel().getElementAt(index);
 
-                formServicoModal dlg = new formServicoModal((JFrame)SwingUtilities.getWindowAncestor(this), true, servicoTempAntes);
+                formServicoModal dlg = new formServicoModal((JFrame)SwingUtilities.getWindowAncestor(this), true, servicoTempAntes, true);
                 Servico servicoTempDepois = dlg.showDiag();
 
                 if(servicoTempDepois != null)

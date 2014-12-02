@@ -105,6 +105,7 @@ CREATE TABLE ServicoFuncionarioOS(
 	codFuncionario smallint NOT NULL,
 	DataServico date NOT NULL DEFAULT CURRENT_DATE,
 	DescricaoServico text,
+	preco decimal,
 	
 	PRIMARY KEY (codServico,codOS , codFuncionario),
 	FOREIGN KEY (codOS) REFERENCES OrdemDeServico(codOS) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -234,12 +235,12 @@ insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstado
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(1,'COC-1237',1,5,122.11, 0);
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',1,5,127.11, 3000);
 insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(1,'COC-1237',2,5,122.11, 500);
-insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',3,6,127.11, 1500);
+insert into OrdemDeServico(codClienteOS, placaCarroOS, codAtendenteOS, codEstadoOS, kmEntradaOS, valorTotalOS) values(2,'BOM-9032',3,5,127.11, 1500);
 
 --Insercao ServicoFuncionarioOS -- eletrica, balanceamento, alinhamento, bateria, vidracaria, 
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(1,2,'eletrica');
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(2,6,'eletrica');
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(3,7,'troca de oleo');
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(4,6,'freios');
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(5,7,'troca de carburador');
-insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico) values(6,7,'conserto da injecao eletronica');
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(1,2,'eletrica', 20);
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(2,6,'eletrica', 30);
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(3,7,'troca de oleo', 10);
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(4,6,'freios', 50);
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(5,7,'troca de carburador', 35);
+insert into ServicoFuncionarioOS(codOS, codFuncionario, descricaoServico, preco) values(6,7,'conserto da injecao eletronica', 100);

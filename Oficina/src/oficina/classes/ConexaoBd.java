@@ -99,10 +99,17 @@ public class ConexaoBd {
     public String buscaNomeMecanico(int codFuncionario){
         String selectMecanico = "SELECT nomeFuncionario FROM Funcionario where codFuncionario ='"+codFuncionario+"';";
         ResultSet busca;
+        Statement tempPraNaoBugar;
+        try{
+            tempPraNaoBugar = myConnection.createStatement();
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Erro ao executar tempPraNaoBuga:" + e.getMessage());
+            return null;
+        }
         
-         try{
-           st.execute(selectMecanico);
-           busca =  st.getResultSet();
+        try{
+           tempPraNaoBugar.execute(selectMecanico);
+           busca =  tempPraNaoBugar.getResultSet();
            
            if(busca.next())
            {              
@@ -350,7 +357,7 @@ public class ConexaoBd {
        
     }
     public void CadastraServico(OrdemDeServico os){
-        String insertServico = "INSERT INTO ServicoFuncionarioOS(codOS, codFuncionario,descricaoServico) VALUES(";
+        String insertServico = "INSERT INTO ServicoFuncionarioOS(codOS, codFuncionario,descricaoServico, preco) VALUES(";
         Iterator<Servico> it = os.servicos.iterator();
         
         while(it.hasNext())
@@ -359,7 +366,8 @@ public class ConexaoBd {
             Servico temp = it.next();
             insertServico2 += os.getCodigoOs() + ",";
             insertServico2 += temp.getCodMecanico() + ",";
-            insertServico2 += "'"+temp.getNomeServico()+"');";
+            insertServico2 += "'"+temp.getNomeServico()+"',";
+            insertServico2 += temp.getPreco() +");";
 
             try{
                st.execute(insertServico+insertServico2);
@@ -386,8 +394,8 @@ public class ConexaoBd {
     }
     
     public void buscaServicosOS(OrdemDeServico os){
-        /*String selectServicos = "SELECT codFuncionario, descricaoServico, preco FROM ServicoFuncionarioOS"
-                +"WHERE codOS="+ os.getCodigoOs()+ ";";
+        String selectServicos = "SELECT codFuncionario, descricaoServico, preco FROM ServicoFuncionarioOS"
+                +" WHERE codOS="+ os.getCodigoOs()+ ";";
         ResultSet busca;
         Servico serv;
         
@@ -403,12 +411,12 @@ public class ConexaoBd {
            }
     }catch(SQLException e){
       JOptionPane.showMessageDialog(null, "Erro ao executar buscaServicosOS: "+e.getMessage());
-    }*/
+    }
     }
     //Preenche objeto OS com dados buscados no BD
     private void preencheOS(OrdemDeServico os, ResultSet busca) throws SQLException{
         os.setCodigoOs(busca.getInt(1));
-        os.setCpfCliente(busca.getString(2));
+        os.setCodCliente(busca.getInt(2));
         os.setPlacaCarro(busca.getString(3));
         os.setKmEntrada(busca.getString(6));
         os.setKmSaida(busca.getString(7));
@@ -416,6 +424,7 @@ public class ConexaoBd {
         os.setDataFim(busca.getString(10));
         os.setValorTotal(busca.getString(8));
         os.setEstado(buscaNomeestadoOS(busca.getInt(5)));
+        os.setCpfCliente(buscaNomeDono(os.getCodigoCliente()));
         buscaServicosOS(os);
     }
     public OrdemDeServico buscaOSCod(int CodigoOS){
@@ -480,8 +489,44 @@ public class ConexaoBd {
        }
         return osList;
     }
-    
-    
+    public int buscaCodEstadoOS(String nomeEstado){
+        String select = "SELECT codEstadoOS from tipoEstadoOS where nomeEstado = '"+nomeEstado+"';";
+        ResultSet busca;
+        
+        try{
+            st.execute(select);
+            busca = st.getResultSet();
+            
+            if(busca.next())
+                return busca.getInt(1);
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar buscaCodEstado: "+e.getMessage());
+       }
+        return -1;
+    }
+    public boolean atualizarOS(OrdemDeServico os){
+        String update = "UPDATE OrdemDeServico SET ";
+        String condition = " WHERE codOS = "+ os.getCodigoOs()+";";
+        
+        update += "codEstadoOS = "+buscaCodEstadoOS(os.getEstado());
+        
+        if(os.getEstado() == "Finalizada")
+        {
+            if(os.getKmSaida().length() > 0)
+                update += ", kmSaidaOS = "+os.getKmSaida();
+            
+            update += ", dataHoraFimOS = CURRENT_TIMESTAMP";
+        }
+        try{
+           st.execute(update + condition);
+           
+           return true;
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar atualizaOS: "+e.getMessage());
+       }
+        return false;
+        
+    }
     
     
     //==========================CLIENTE=========================================
@@ -815,7 +860,7 @@ public class ConexaoBd {
                st.execute(selectPessoa);
                busca = st.getResultSet();
                
-               if(!busca.next())
+               if(busca.next())
                    return busca.getString(1);
                    
            }       

@@ -28,7 +28,7 @@ public class formServicoModal extends javax.swing.JDialog
         this.setLocationRelativeTo(null);
     }
     
-    public formServicoModal(java.awt.Frame parent, boolean modal, Servico s)
+    public formServicoModal(java.awt.Frame parent, boolean modal, Servico s, boolean podeAlterar)
     {
         super(parent, modal);
         initComponents();
@@ -39,8 +39,13 @@ public class formServicoModal extends javax.swing.JDialog
        
         taDescr.setText(s.getNomeServico());
         tfPreco.setText(s.getPreco());
-        tfPreco.setEnabled(false);
+        tfPreco.setEditable(false);
         
+        if(!podeAlterar)
+        {
+            taDescr.setEditable(false);
+            cbMecanico.setEnabled(false);
+        }
         
         this.setLocationRelativeTo(null);
     }
@@ -58,7 +63,8 @@ public class formServicoModal extends javax.swing.JDialog
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         panelCriarServiço = new javax.swing.JPanel();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
@@ -117,14 +123,16 @@ public class formServicoModal extends javax.swing.JDialog
         panelCriarServiço.add(panelMecanico);
 
         lbAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        lbAlerta.setPreferredSize(new java.awt.Dimension(220, 14));
+        lbAlerta.setPreferredSize(new java.awt.Dimension(250, 14));
         panelAlerta.add(lbAlerta);
 
         panelCriarServiço.add(panelAlerta);
 
         btOk.setText("OK");
-        btOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btOk.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btOkActionPerformed(evt);
             }
         });
