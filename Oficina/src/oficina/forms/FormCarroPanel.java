@@ -123,8 +123,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         lbObs = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taObs = new javax.swing.JTextArea();
-        panelAlertaHolder = new javax.swing.JPanel();
-        lbAlerta = new javax.swing.JLabel();
         panelBotoes = new javax.swing.JPanel();
         btCadastrar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
@@ -145,7 +143,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         panelCliente.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btSelecionarCliente.setText("* Cliente: ");
+        btSelecionarCliente.setText("Cliente: ");
         btSelecionarCliente.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -163,7 +161,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         panelPlacaRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbPlaca.setText("* Placa:");
+        lbPlaca.setText("Placa:");
         lbPlaca.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         panelPlacaRow1.add(lbPlaca);
 
@@ -186,18 +184,17 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         jPanel1.add(panelPlacaRow1);
 
+        panelPlacaAlertaHolder.setPreferredSize(new java.awt.Dimension(169, 24));
         panelPlacaAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbPlacaAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        lbPlacaAlerta.setToolTipText("");
-        lbPlacaAlerta.setPreferredSize(new java.awt.Dimension(240, 14));
         panelPlacaAlertaHolder.add(lbPlacaAlerta);
 
         jPanel1.add(panelPlacaAlertaHolder);
 
         panelMarca.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbMarca.setText("* Marca: ");
+        lbMarca.setText("Marca: ");
         panelMarca.add(lbMarca);
 
         cboxMarca.addItemListener(new java.awt.event.ItemListener()
@@ -213,7 +210,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         panelModelo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbModelo.setText("* Modelo: ");
+        lbModelo.setText("Modelo: ");
         panelModelo.add(lbModelo);
         panelModelo.add(cboxModelo);
 
@@ -222,7 +219,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
         panelCor.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbCor.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbCor.setText("* Cor:");
+        lbCor.setText("Cor:");
         lbCor.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         panelCor.add(lbCor);
 
@@ -233,7 +230,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         panelAnoRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbAno.setText("* Ano: ");
+        lbAno.setText("Ano: ");
         panelAnoRow1.add(lbAno);
 
         tfAno.setColumns(5);
@@ -254,10 +251,10 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         jPanel1.add(panelAnoRow1);
 
+        panelAnoAlertaHolder.setPreferredSize(new java.awt.Dimension(169, 24));
         panelAnoAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbAnoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        lbAnoAlerta.setPreferredSize(new java.awt.Dimension(240, 14));
         panelAnoAlertaHolder.add(lbAnoAlerta);
 
         jPanel1.add(panelAnoAlertaHolder);
@@ -276,15 +273,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         panelObs.add(jScrollPane1);
 
         jPanel1.add(panelObs);
-
-        panelAlertaHolder.setPreferredSize(new java.awt.Dimension(169, 24));
-        panelAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbAlerta.setText("(*) Campos obrigatórios.");
-        panelAlertaHolder.add(lbAlerta);
-
-        jPanel1.add(panelAlertaHolder);
 
         btCadastrar.setText("Cadastrar");
         btCadastrar.addActionListener(new java.awt.event.ActionListener()
@@ -328,14 +316,7 @@ public class FormCarroPanel extends javax.swing.JPanel {
 
         if(clienteCpfCnpj != null)
         {
-            String cod;
-            String nome;
-            cod = ""+this.codCliente;
-            ConexaoBd bd = new ConexaoBd();
-            nome = bd.buscaNomeCliente(true, cod);
-           
-           
-            lbClienteText.setText(nome);
+            lbClienteText.setText(clienteCpfCnpj);
             lbClienteText.setForeground(Color.black);
         }
 
@@ -397,15 +378,14 @@ public class FormCarroPanel extends javax.swing.JPanel {
         //Se a placa nao foi informada e preciso pedir ao usuario que a preencha
         if(tfPlaca.getText().trim().isEmpty())
         {
-            lbPlaca.setForeground(Color.red);
-            lbAlerta.setForeground(Color.red);
+            lbPlacaAlerta.setText("Por favor, preencha este campo!");
             flagCampos = 0;
         }
 
         else
         {
             //Apaga label de alerta
-            lbPlaca.setForeground(Color.black);
+            lbPlacaAlerta.setText("");
 
             try{ verificaStringPlaca(tfPlaca.getText());}
 
@@ -418,14 +398,13 @@ public class FormCarroPanel extends javax.swing.JPanel {
         //Se o ano nao foi informado e preciso pedir ao usuario que o preencha
         if(tfAno.getText().trim().isEmpty())
         {
-            lbAno.setForeground(Color.red);
-            lbAlerta.setForeground(Color.red);
+            lbAnoAlerta.setText("Por favor, preencha este campo!");
             flagCampos = 0;
         }
 
         else //o ano foi informado pelo usuario
         {
-            lbAno.setForeground(Color.black);
+            lbAnoAlerta.setText("");
 
             try{ verificaAno(Integer.parseInt(tfAno.getText()));} //guarda no objeto o ano informado pelo usuario
             catch(RuntimeException e){
@@ -462,7 +441,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
             cboxMarca.setSelectedIndex(0);
             cboxModelo.setSelectedIndex(0);
             cboxCor.setSelectedIndex(0);
-            lbAlerta.setForeground(Color.black);
 
             JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso!");
         }
@@ -472,8 +450,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         //Limpa todos os campos
         lbClienteText.setText("NÃO INFORMADO");
         lbClienteText.setForeground(Color.black);
-        lbPlaca.setForeground(Color.black);
-        lbAno.setForeground(Color.black);
         clienteCpfCnpj = null;
         tfPlaca.setText(null);
         tfAno.setText(null);
@@ -483,7 +459,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         cboxMarca.setSelectedIndex(0);
         cboxModelo.setSelectedIndex(0);
         cboxCor.setSelectedIndex(0);
-        lbAlerta.setForeground(Color.black);
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
@@ -516,7 +491,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox cboxModelo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbAlerta;
     private javax.swing.JLabel lbAno;
     private javax.swing.JLabel lbAnoAlerta;
     private javax.swing.JLabel lbAnoEx;
@@ -530,7 +504,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbPlacaAlerta;
     private javax.swing.JLabel lbPlacaEx;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JPanel panelAlertaHolder;
     private javax.swing.JPanel panelAnoAlertaHolder;
     private javax.swing.JPanel panelAnoRow1;
     private javax.swing.JPanel panelBotoes;

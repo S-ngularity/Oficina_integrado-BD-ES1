@@ -67,9 +67,6 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tfCodUsuarioActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -100,9 +97,6 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jpSenhaActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

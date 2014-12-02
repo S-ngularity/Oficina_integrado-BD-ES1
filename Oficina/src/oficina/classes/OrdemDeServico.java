@@ -22,6 +22,7 @@ public class OrdemDeServico
     private String kmEntrada, kmSaida;
     private String dataInicio, dataFim;
     private String horaInicio, horaFim;
+    private String tipo;
     private String estado;
     private String valorTotal;
     public List<Servico> servicos;
@@ -113,6 +114,14 @@ public class OrdemDeServico
     }
 
     /**
+     * @return the tipo
+     */
+    public String getTipo()
+    {
+        return tipo;
+    }
+
+    /**
      * @param tipo the tipo to set
      */
   
@@ -130,6 +139,14 @@ public class OrdemDeServico
     public void setEstado(String estado)
     {
         this.estado = estado;
+    }
+
+    /**
+     * @param tipo the tipo to set
+     */
+    public void setTipo(String tipo)
+    {
+        this.tipo = tipo;
     }
 
     /**

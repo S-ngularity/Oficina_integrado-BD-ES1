@@ -36,7 +36,7 @@ public class ConexaoBd {
 
     public ConexaoBd(){
         String user = "postgres";
-        String password = "asdasd";
+        String password = "manezao29";
         try{
             Class.forName("org.postgresql.Driver").newInstance();
             myConnection = DriverManager.getConnection("jdbc:postgresql:"+"//localhost/Oficina?user=" + 
@@ -180,7 +180,7 @@ public class ConexaoBd {
     
     public List<Carro> buscaCarroClienteFisico(PessoaFisica cliente){
         List<Carro> carros = new ArrayList<Carro>();
-        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca where "
+        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca, where "
                 + "modelo.codModelo = Carro.codModelo AND marca.codMarca = modelo.codMarca AND Carro.codDono ="
                 + cliente.getCodCliente() + ";";
         ResultSet busca;
@@ -200,14 +200,14 @@ public class ConexaoBd {
                   
       }
       catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroClienteFisico: "+e.getMessage());
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroCliente: "+e.getMessage());
        }
         
         return carros;
     }
     public List<Carro> buscaCarroClienteJuridico(PessoaJuridica cliente){
         List<Carro> carros = new ArrayList<Carro>();
-        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca where "
+        String selectCarro = "SELECT * FROM Carro, ModeloCarro AS modelo, MarcaCarro AS marca, where "
                 + "modelo.codModelo = Carro.codModelo AND marca.codMarca = modelo.codMarca AND Carro.codDono ="
                 + cliente.getCodCliente() + ";";
         ResultSet busca;
@@ -227,7 +227,7 @@ public class ConexaoBd {
                   
       }
       catch(SQLException e){
-           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroClienteJuridico: "+e.getMessage());
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaCarroCliente: "+e.getMessage());
        }
         
         return carros;
@@ -374,7 +374,7 @@ public class ConexaoBd {
         os.setDataInicio(busca.getString(9));
         os.setDataFim(busca.getString(10));
         os.setValorTotal(busca.getString(8));
-        os.setEstado(buscaNomeestadoOS(busca.getInt(5)));
+        os.setTipo(buscaNomeestadoOS(busca.getInt(5)));
     }
     public OrdemDeServico buscaOSCod(int CodigoOS){
         String selectOS = "SELECT * from OrdemDeServico where codOS = "+ CodigoOS + ";";
