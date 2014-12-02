@@ -49,7 +49,8 @@ public class VisualizaCarro extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
@@ -77,8 +78,8 @@ public class VisualizaCarro extends javax.swing.JFrame
         jScrollPane1 = new javax.swing.JScrollPane();
         taObsText = new javax.swing.JTextArea();
         panelBotoes = new javax.swing.JPanel();
-        btSair = new javax.swing.JButton();
         btOS = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
@@ -175,38 +176,48 @@ public class VisualizaCarro extends javax.swing.JFrame
 
         getContentPane().add(panelObsRow2);
 
-        btSair.setText("Sair");
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
-        panelBotoes.add(btSair);
-
         btOS.setText("Ver OS");
-        btOS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btOS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btOSActionPerformed(evt);
             }
         });
         panelBotoes.add(btOS);
 
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btSairActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(btSair);
+
         getContentPane().add(panelBotoes);
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(250, 100));
 
         tabela.setBackground(new java.awt.Color(204, 204, 204));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {},
                 {},
                 {},
                 {}
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabela.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaMouseClicked(evt);
             }
         });

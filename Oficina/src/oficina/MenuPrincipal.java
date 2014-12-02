@@ -38,7 +38,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelMid.add(panelCarro, "carro");
         panelMid.add(panelOs, "os");
         panelMid.add(panelBusca, "busca");
-        ((CardLayout) panelMid.getLayout()).show(panelMid, "pessoa");
+        ((CardLayout) panelMid.getLayout()).show(panelMid, "busca");
 
         panelMid.setPreferredSize(panelPessoa.getPreferredSize());
         this.pack();
@@ -56,7 +56,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         panelMidHolder = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -75,10 +76,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         lbPermissaoText = new javax.swing.JLabel();
         panelLeft = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        btBusca = new javax.swing.JButton();
         btCadPessoa = new javax.swing.JButton();
         btCadCarro = new javax.swing.JButton();
         btCadOs = new javax.swing.JButton();
-        btBusca = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu Principal");
@@ -148,14 +149,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
+        btBusca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/search.png"))); // NOI18N
+        btBusca.setToolTipText("Busca");
+        btBusca.setMaximumSize(new java.awt.Dimension(110, 110));
+        btBusca.setMinimumSize(new java.awt.Dimension(110, 110));
+        btBusca.setPreferredSize(new java.awt.Dimension(110, 110));
+        btBusca.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btBuscaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btBusca);
+
         btCadPessoa.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btCadPessoa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/pessoaFisica.png"))); // NOI18N
         btCadPessoa.setToolTipText("Cadastro de Pessoa Física");
         btCadPessoa.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadPessoa.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadPessoa.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCadPessoa.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCadPessoaActionPerformed(evt);
             }
         });
@@ -167,8 +185,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btCadCarro.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadCarro.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadCarro.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCadCarro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCadCarroActionPerformed(evt);
             }
         });
@@ -180,25 +200,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btCadOs.setMaximumSize(new java.awt.Dimension(110, 110));
         btCadOs.setMinimumSize(new java.awt.Dimension(110, 110));
         btCadOs.setPreferredSize(new java.awt.Dimension(110, 110));
-        btCadOs.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCadOs.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCadOsActionPerformed(evt);
             }
         });
         jPanel1.add(btCadOs);
-
-        btBusca.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btBusca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/search.png"))); // NOI18N
-        btBusca.setToolTipText("Busca");
-        btBusca.setMaximumSize(new java.awt.Dimension(110, 110));
-        btBusca.setMinimumSize(new java.awt.Dimension(110, 110));
-        btBusca.setPreferredSize(new java.awt.Dimension(110, 110));
-        btBusca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btBuscaActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btBusca);
 
         panelLeft.add(jPanel1);
 

@@ -59,16 +59,15 @@ public class FormOsPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
         panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
         panelHolder = new javax.swing.JPanel();
+        panelHolderInside = new javax.swing.JPanel();
         panelInfo = new javax.swing.JPanel();
-        panelCodigo = new javax.swing.JPanel();
-        lbCodigo = new javax.swing.JLabel();
-        lbCodigoText = new javax.swing.JLabel();
         panelCarro = new javax.swing.JPanel();
         btSelecionarCarro = new javax.swing.JButton();
         lbCarroText = new javax.swing.JLabel();
@@ -84,25 +83,6 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelKmEntrada = new javax.swing.JPanel();
         lbKmEntrada = new javax.swing.JLabel();
         tfKmEntrada = new javax.swing.JTextField();
-        panelKmSaida = new javax.swing.JPanel();
-        lbKmSaida = new javax.swing.JLabel();
-        tfKmSaida = new javax.swing.JTextField();
-        panelDataInicio = new javax.swing.JPanel();
-        lbDataInicio = new javax.swing.JLabel();
-        tfDataInicio = new javax.swing.JFormattedTextField();
-        lbDataInicioEx = new javax.swing.JLabel();
-        panelHoraInicio = new javax.swing.JPanel();
-        lbHoraInicio = new javax.swing.JLabel();
-        tfHoraInicio = new javax.swing.JFormattedTextField();
-        lbHoraInicioEx = new javax.swing.JLabel();
-        panelDataFim = new javax.swing.JPanel();
-        lbDataFim = new javax.swing.JLabel();
-        tfDataFim = new javax.swing.JFormattedTextField();
-        lbDataFimEx = new javax.swing.JLabel();
-        panelHoraFim = new javax.swing.JPanel();
-        lbHoraFim = new javax.swing.JLabel();
-        tfHoraFim = new javax.swing.JFormattedTextField();
-        tfHoraFimEx = new javax.swing.JLabel();
         panelAlerta = new javax.swing.JPanel();
         lbAlerta = new javax.swing.JLabel();
         panelHolderServicos = new javax.swing.JPanel();
@@ -132,21 +112,13 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         panelInfo.setLayout(new javax.swing.BoxLayout(panelInfo, javax.swing.BoxLayout.PAGE_AXIS));
 
-        panelCodigo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbCodigo.setText("Código:");
-        panelCodigo.add(lbCodigo);
-
-        lbCodigoText.setPreferredSize(new java.awt.Dimension(60, 14));
-        panelCodigo.add(lbCodigoText);
-
-        panelInfo.add(panelCodigo);
-
         panelCarro.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btSelecionarCarro.setText("Carro:");
-        btSelecionarCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btSelecionarCarro.setText("* Carro:");
+        btSelecionarCarro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btSelecionarCarroActionPerformed(evt);
             }
         });
@@ -164,14 +136,14 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelCliente.add(lbCliente);
 
         lbClienteText.setText("NÃO INFORMADO");
-        lbClienteText.setPreferredSize(new java.awt.Dimension(170, 14));
+        lbClienteText.setPreferredSize(new java.awt.Dimension(230, 14));
         panelCliente.add(lbClienteText);
 
         panelInfo.add(panelCliente);
 
         panelTipo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbTipo.setText("Tipo: ");
+        lbTipo.setText("* Tipo: ");
         panelTipo.add(lbTipo);
 
         cboxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Revisão", "Revisão mais Problema", "Problema", "Retorno" }));
@@ -192,12 +164,14 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         panelKmEntrada.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbKmEntrada.setText("Quilometragem de Entrada: ");
+        lbKmEntrada.setText("* Quilometragem de Entrada: ");
         panelKmEntrada.add(lbKmEntrada);
 
         tfKmEntrada.setColumns(10);
-        tfKmEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfKmEntrada.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfKmEntradaKeyTyped(evt);
             }
         });
@@ -205,100 +179,32 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         panelInfo.add(panelKmEntrada);
 
-        panelKmSaida.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbKmSaida.setText("Quilometragem de Saída:     ");
-        panelKmSaida.add(lbKmSaida);
-
-        tfKmSaida.setColumns(10);
-        tfKmSaida.setEnabled(false);
-        panelKmSaida.add(tfKmSaida);
-
-        panelInfo.add(panelKmSaida);
-
-        panelDataInicio.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbDataInicio.setText("Data de Início:");
-        panelDataInicio.add(lbDataInicio);
-
-        tfDataInicio.setColumns(10);
-        tfDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        panelDataInicio.add(tfDataInicio);
-
-        lbDataInicioEx.setForeground(new java.awt.Color(102, 102, 102));
-        lbDataInicioEx.setText("ex: dd/mm/yyyy");
-        panelDataInicio.add(lbDataInicioEx);
-
-        panelInfo.add(panelDataInicio);
-
-        panelHoraInicio.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbHoraInicio.setText("Horário de Início: ");
-        panelHoraInicio.add(lbHoraInicio);
-
-        tfHoraInicio.setColumns(6);
-        tfHoraInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        panelHoraInicio.add(tfHoraInicio);
-
-        lbHoraInicioEx.setForeground(new java.awt.Color(102, 102, 102));
-        lbHoraInicioEx.setText("ex: 18:00");
-        panelHoraInicio.add(lbHoraInicioEx);
-
-        panelInfo.add(panelHoraInicio);
-
-        panelDataFim.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbDataFim.setText("Data de Fim:");
-        panelDataFim.add(lbDataFim);
-
-        tfDataFim.setColumns(10);
-        tfDataFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        tfDataFim.setEnabled(false);
-        panelDataFim.add(tfDataFim);
-
-        lbDataFimEx.setForeground(new java.awt.Color(102, 102, 102));
-        lbDataFimEx.setText("ex: dd/mm/yyyy");
-        panelDataFim.add(lbDataFimEx);
-
-        panelInfo.add(panelDataFim);
-
-        panelHoraFim.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbHoraFim.setText("Horário de Fim:    ");
-        panelHoraFim.add(lbHoraFim);
-
-        tfHoraFim.setColumns(6);
-        tfHoraFim.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getTimeInstance(java.text.DateFormat.SHORT))));
-        tfHoraFim.setEnabled(false);
-        panelHoraFim.add(tfHoraFim);
-
-        tfHoraFimEx.setForeground(new java.awt.Color(102, 102, 102));
-        tfHoraFimEx.setText("ex: 18:30");
-        panelHoraFim.add(tfHoraFimEx);
-
-        panelInfo.add(panelHoraFim);
-
         panelAlerta.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbAlerta.setForeground(new java.awt.Color(255, 0, 0));
+        lbAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbAlerta.setText("(*) Campos obrigatórios.");
         lbAlerta.setPreferredSize(new java.awt.Dimension(280, 14));
         panelAlerta.add(lbAlerta);
 
         panelInfo.add(panelAlerta);
 
-        panelHolder.add(panelInfo);
+        panelHolderInside.add(panelInfo);
+
+        panelHolder.add(panelHolderInside);
 
         panelServicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviços:"));
         panelServicos.setLayout(new javax.swing.BoxLayout(panelServicos, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(160, 260));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(160, 200));
 
         lServicos.setModel(new DefaultListModel<Servico>()
         );
         lServicos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lServicos.setVisibleRowCount(10);
-        lServicos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        lServicos.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 lServicosMouseClicked(evt);
             }
         });
@@ -309,16 +215,20 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelBotoesLista.setLayout(new java.awt.GridLayout(1, 2, 20, 0));
 
         btAdd.setText("Adicionar");
-        btAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btAdd.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btAddActionPerformed(evt);
             }
         });
         panelBotoesLista.add(btAdd);
 
         btDel.setText("Remover");
-        btDel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btDel.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btDelActionPerformed(evt);
             }
         });
@@ -344,24 +254,30 @@ public class FormOsPanel extends javax.swing.JPanel {
         jPanel1.add(panelHolder);
 
         btCadastrar.setText("Cadastrar");
-        btCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCadastrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCadastrarActionPerformed(evt);
             }
         });
         panelBotoes.add(btCadastrar);
 
         btLimpar.setText("Limpar");
-        btLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btLimpar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btLimparActionPerformed(evt);
             }
         });
         panelBotoes.add(btLimpar);
 
         btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btVisualizar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btVisualizarActionPerformed(evt);
             }
         });
@@ -379,9 +295,15 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         if(placa != null)
         {
+            String cod;
+            String nome;
+            cod = ""+codigoCliente;
+            ConexaoBd bd = new ConexaoBd();
+            nome = bd.buscaNomeCliente(true, cod);
+           
             lbCarroText.setText(placa);
             lbCarroText.setForeground(Color.black);
-            lbClienteText.setText("cliente dono atual do carro (bd)");
+            lbClienteText.setText(nome);
             //buscar dono atual do carro
         }
 
@@ -440,26 +362,14 @@ public class FormOsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btDelActionPerformed
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        if(tfKmEntrada.getText().equals("") || tfDataInicio.getText().equals("")
-            || tfHoraInicio.getText().equals("  :  ")
-            || placa == null) // || clienteCpfCnpj == null
+        if(tfKmEntrada.getText().equals("") || placa == null) // || clienteCpfCnpj == null
         {
-            lbAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbAlerta.setForeground(Color.red);
 
             if(tfKmEntrada.getText().equals(""))
                 lbKmEntrada.setForeground(Color.red);
             else
                 lbKmEntrada.setForeground(Color.black);
-
-            if(tfDataInicio.getText().equals(""))
-                lbDataInicio.setForeground(Color.red);
-            else
-                lbDataInicio.setForeground(Color.black);
-
-            if(tfHoraInicio.getText().equals("  :  "))
-                lbHoraInicio.setForeground(Color.red);
-            else
-                lbHoraInicio.setForeground(Color.black);
 
             if(placa == null)
                 lbCarroText.setForeground(Color.red);
@@ -472,10 +382,8 @@ public class FormOsPanel extends javax.swing.JPanel {
         else
         {
             // tira alertas
-            lbAlerta.setText(null);
+            lbAlerta.setForeground(Color.black);
             lbKmEntrada.setForeground(Color.black);
-            lbDataInicio.setForeground(Color.black);
-            lbHoraInicio.setForeground(Color.black);
             lbCarroText.setForeground(Color.black);
             lbClienteText.setForeground(Color.black);
 
@@ -503,8 +411,6 @@ public class FormOsPanel extends javax.swing.JPanel {
 
             // reseta campos da interface
             tfKmEntrada.setText("");
-            tfDataInicio.setText("");
-            tfHoraInicio.setText("");
             lbCarroText.setText("NÃO INFORMADO");
             placa = null;
             lbClienteText.setText("NÃO INFORMADO");
@@ -516,16 +422,12 @@ public class FormOsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        lbAlerta.setText(null);
+        lbAlerta.setForeground(Color.black);
         lbKmEntrada.setForeground(Color.black);
-        lbDataInicio.setForeground(Color.black);
-        lbHoraInicio.setForeground(Color.black);
         lbCarroText.setForeground(Color.black);
         lbClienteText.setForeground(Color.black);
 
         tfKmEntrada.setText("");
-        tfDataInicio.setText("");
-        tfHoraInicio.setText("");
         lbCarroText.setText("NÃO INFORMADO");
         placa = null;
         lbClienteText.setText("NÃO INFORMADO");
@@ -579,18 +481,8 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbCarroText;
     private javax.swing.JLabel lbCliente;
     private javax.swing.JLabel lbClienteText;
-    private javax.swing.JLabel lbCodigo;
-    private javax.swing.JLabel lbCodigoText;
-    private javax.swing.JLabel lbDataFim;
-    private javax.swing.JLabel lbDataFimEx;
-    private javax.swing.JLabel lbDataInicio;
-    private javax.swing.JLabel lbDataInicioEx;
     private javax.swing.JLabel lbEstado;
-    private javax.swing.JLabel lbHoraFim;
-    private javax.swing.JLabel lbHoraInicio;
-    private javax.swing.JLabel lbHoraInicioEx;
     private javax.swing.JLabel lbKmEntrada;
-    private javax.swing.JLabel lbKmSaida;
     private javax.swing.JLabel lbTipo;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbValor;
@@ -600,28 +492,17 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelBotoesLista;
     private javax.swing.JPanel panelCarro;
     private javax.swing.JPanel panelCliente;
-    private javax.swing.JPanel panelCodigo;
-    private javax.swing.JPanel panelDataFim;
-    private javax.swing.JPanel panelDataInicio;
     private javax.swing.JPanel panelEstado;
     private javax.swing.JPanel panelHolder;
+    private javax.swing.JPanel panelHolderInside;
     private javax.swing.JPanel panelHolderServicos;
-    private javax.swing.JPanel panelHoraFim;
-    private javax.swing.JPanel panelHoraInicio;
     private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel panelKmEntrada;
-    private javax.swing.JPanel panelKmSaida;
     private javax.swing.JPanel panelServicos;
     private javax.swing.JPanel panelTipo;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JPanel panelValor;
-    private javax.swing.JFormattedTextField tfDataFim;
-    private javax.swing.JFormattedTextField tfDataInicio;
-    private javax.swing.JFormattedTextField tfHoraFim;
-    private javax.swing.JLabel tfHoraFimEx;
-    private javax.swing.JFormattedTextField tfHoraInicio;
     private javax.swing.JTextField tfKmEntrada;
-    private javax.swing.JTextField tfKmSaida;
     // End of variables declaration//GEN-END:variables
     private String placa;
     private String clienteCpfCnpj;
