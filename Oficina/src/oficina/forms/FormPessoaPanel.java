@@ -27,7 +27,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         
         this.funcionario = func;
         initComponents();
-        //this.setLocationRelativeTo(null);
         tfFisicaCep.setForeground(Color.gray);
         tfFisicaRg.setForeground(Color.gray);
         tfFisicaCpf.setForeground(Color.gray);
@@ -113,11 +112,9 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         if(tfFisicaNome.getText().isEmpty() || !verificaRg() ||
                 !verificaCpf())
         {
-            lbFisicaInfoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbFisicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-           lbFisicaInfoAlerta.setText("");
 
         if(tfFisicaNome.getText().isEmpty())
           lbFisicaNome.setForeground(Color.red);       
@@ -143,11 +140,9 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         if(tfFisicaRua.getText().isEmpty() || tfFisicaNumero.getText().isEmpty() || !verificaFisicaCep()
                 || tfFisicaBairro.getText().isEmpty() || tfFisicaCidade.getText().isEmpty())
         {
-            lbFisicaEnderecoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbFisicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-            lbFisicaEnderecoAlerta.setText("");
         
         if(tfFisicaRua.getText().isEmpty())
             lbFisicaRua.setForeground(Color.red);
@@ -182,11 +177,9 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         
         if(!verificaTelefone() || tfFisicaEmail.getText().isEmpty() || !verificaCelular())
         {
-            lbFisicaContatoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbFisicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-            lbFisicaContatoAlerta.setText("");
         
         if(!verificaTelefone())
             lbFisicaTelefone.setForeground(Color.red);
@@ -211,11 +204,9 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         
         if(tfJuridicaNomeComercial.getText().isEmpty() || !verificaCnpj())
         {
-            lbJuridicaInfoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbJuridicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-           lbJuridicaInfoAlerta.setText("");
 
         if(tfJuridicaNomeComercial.getText().isEmpty())
           lbJuridicaNomeComercial.setForeground(Color.red);       
@@ -231,17 +222,15 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         return retorno;
     }
     
-        private boolean validaEndereco(){
+    private boolean validaJuridicaEndereco(){
         boolean retorno = true;
         
         if(tfJuridicaRua.getText().isEmpty() || tfJuridicaNumero.getText().isEmpty() || !verificaJuridicaCep()
                 || tfJuridicaBairro.getText().isEmpty() || tfJuridicaCidade.getText().isEmpty())
         {
-            lbJuridicaEnderecoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbJuridicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-            lbJuridicaEnderecoAlerta.setText("");
         
         if(tfJuridicaRua.getText().isEmpty())
             lbJuridicaRua.setForeground(Color.red);
@@ -276,11 +265,9 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         
         if(!verificaTelefoneComercial() || tfJuridicaEmail.getText().isEmpty() || !verificaFax())
         {
-            lbJuridicaContatoAlerta.setText("Por favor, preencha os campos destacados em vermelho.");
+            lbJuridicaAlerta.setForeground(Color.red);
             retorno = false;
         }
-        else
-            lbJuridicaContatoAlerta.setText("");
         
         if(!verificaTelefoneComercial())
             lbJuridicaTelefoneComercial.setForeground(Color.red);
@@ -321,17 +308,15 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         tfFisicaResidencial.setForeground(Color.gray);
         tfFisicaCelular.setForeground(Color.gray);
         
-        lbFisicaInfoAlerta.setText(null);
+        lbFisicaAlerta.setForeground(Color.black);
         lbFisicaNome.setForeground(Color.BLACK);
         lbFisicaRg.setForeground(Color.BLACK);
         lbFisicaCpf.setForeground(Color.BLACK);
-        lbFisicaEnderecoAlerta.setText(null);
         lbFisicaRua.setForeground(Color.black);
         lbFisicaNumero.setForeground(Color.black);
         lbFisicaCep.setForeground(Color.black);
         lbFisicaBairro.setForeground(Color.black);
         lbFisicaCidade.setForeground(Color.black);
-        lbFisicaContatoAlerta.setText(null);
         lbFisicaTelefone.setForeground(Color.black);
         lbFisicaEmail.setForeground(Color.black);
         lbFisicaCelular.setForeground(Color.black);
@@ -356,16 +341,14 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         tfJuridicaFax.setForeground(Color.gray);
         tfJuridicaTelefoneComercial.setForeground(Color.gray);
         
-        lbJuridicaInfoAlerta.setText(null);
+        lbJuridicaAlerta.setForeground(Color.black);
         lbJuridicaNomeComercial.setForeground(Color.black);
         lbJuridicaCnpj.setForeground(Color.black);
-        lbJuridicaEnderecoAlerta.setText(null);
         lbJuridicaRua.setForeground(Color.black);
         lbJuridicaNumero.setForeground(Color.black);
         lbJuridicaCep.setForeground(Color.black);
         lbJuridicaBairro.setForeground(Color.black);
         lbJuridicaCidade.setForeground(Color.black);
-        lbJuridicaContatoAlerta.setText(null);
         lbJuridicaTelefoneComercial.setForeground(Color.black);
         lbJuridicaEmail.setForeground(Color.black);
         lbJuridicaFax.setForeground(Color.black);
@@ -378,7 +361,8 @@ public class FormPessoaPanel extends javax.swing.JPanel {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
@@ -395,8 +379,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         tfFisicaRg = new javax.swing.JFormattedTextField();
         lbFisicaCpf = new javax.swing.JLabel();
         tfFisicaCpf = new javax.swing.JFormattedTextField();
-        panelFisicaInfoAlertaHolder = new javax.swing.JPanel();
-        lbFisicaInfoAlerta = new javax.swing.JLabel();
         panelFisicaLbEndrcHolder = new javax.swing.JPanel();
         lbFisicaFisicaEndereco = new javax.swing.JLabel();
         panelFisicaEndrcRow1 = new javax.swing.JPanel();
@@ -414,8 +396,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelFisicaEndrcRow3 = new javax.swing.JPanel();
         lbFisicaEstado = new javax.swing.JLabel();
         cbFisicaEstado = new javax.swing.JComboBox();
-        panelFisicaEndrcAlertaHolder = new javax.swing.JPanel();
-        lbFisicaEnderecoAlerta = new javax.swing.JLabel();
         panelFisicaLbConttsHolder = new javax.swing.JPanel();
         lbFisicaContatos = new javax.swing.JLabel();
         panelFisicaConttsRow1 = new javax.swing.JPanel();
@@ -426,12 +406,12 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelFisicaCottsRow2 = new javax.swing.JPanel();
         lbFisicaEmail = new javax.swing.JLabel();
         tfFisicaEmail = new javax.swing.JTextField();
-        panelFisicaConttsAlertaHolder = new javax.swing.JPanel();
-        lbFisicaContatoAlerta = new javax.swing.JLabel();
         panelFisicaObs = new javax.swing.JPanel();
         lbFisicaObs = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         taFisicaObservacoes = new javax.swing.JTextArea();
+        panelFisicaAlertaHolder = new javax.swing.JPanel();
+        lbFisicaAlerta = new javax.swing.JLabel();
         paneFisicalBotoes = new javax.swing.JPanel();
         btFisicaCadastrar = new javax.swing.JButton();
         btFisicaLimpar = new javax.swing.JButton();
@@ -445,8 +425,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelDadosRow2 = new javax.swing.JPanel();
         lbJuridicaCnpj = new javax.swing.JLabel();
         tfJuridicaCnpj = new javax.swing.JFormattedTextField();
-        panelJuridicaInfoAlertaHolder = new javax.swing.JPanel();
-        lbJuridicaInfoAlerta = new javax.swing.JLabel();
         panelJuridicaLbEndrcHolder = new javax.swing.JPanel();
         lbJuridicaEndereco = new javax.swing.JLabel();
         panelEndrcRow1 = new javax.swing.JPanel();
@@ -464,8 +442,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelJuridicaEndrcRow3 = new javax.swing.JPanel();
         lbJuridicaEstado = new javax.swing.JLabel();
         cbJuridicaEstado = new javax.swing.JComboBox();
-        panelJuridicaEndrcAlertaHolder = new javax.swing.JPanel();
-        lbJuridicaEnderecoAlerta = new javax.swing.JLabel();
         panelJuridicaLbConttsHolder = new javax.swing.JPanel();
         lbJuridicaContatos = new javax.swing.JLabel();
         panelJuridicaConttsRow1 = new javax.swing.JPanel();
@@ -476,12 +452,12 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelJuridicaConttsRow2 = new javax.swing.JPanel();
         lbJuridicaEmail = new javax.swing.JLabel();
         tfJuridicaEmail = new javax.swing.JTextField();
-        panelJuridicaConttsAlertaHolder = new javax.swing.JPanel();
-        lbJuridicaContatoAlerta = new javax.swing.JLabel();
         panelJuridicaObs = new javax.swing.JPanel();
         lbJuridicaObs = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         taJuridicaObservacoes = new javax.swing.JTextArea();
+        panelJuridicaAlertaHolder = new javax.swing.JPanel();
+        lbJuridicaAlerta = new javax.swing.JLabel();
         panelJuridicaBotoes = new javax.swing.JPanel();
         btJuridicaCadastrar = new javax.swing.JButton();
         btJuridicaLimpar = new javax.swing.JButton();
@@ -511,12 +487,14 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelFisicaDadosRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbFisicaNome.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbFisicaNome.setText("  Nome:");
+        lbFisicaNome.setText("  * Nome:");
         panelFisicaDadosRow1.add(lbFisicaNome);
 
         tfFisicaNome.setColumns(45);
-        tfFisicaNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaNome.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaNomeKeyTyped(evt);
             }
         });
@@ -526,55 +504,57 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelFisicaDadosRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbFisicaRg.setText("  RG:");
+        lbFisicaRg.setText("  * RG:");
         panelFisicaDadosRow2.add(lbFisicaRg);
 
         tfFisicaRg.setColumns(12);
-        try {
+        try
+        {
             tfFisicaRg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###-#")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaRg.setText("000000000");
-        tfFisicaRg.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaRg.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaRgFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaRgFocusLost(evt);
             }
         });
         panelFisicaDadosRow2.add(tfFisicaRg);
 
-        lbFisicaCpf.setText("CPF:");
+        lbFisicaCpf.setText("* CPF:");
         panelFisicaDadosRow2.add(lbFisicaCpf);
 
         tfFisicaCpf.setColumns(14);
-        try {
+        try
+        {
             tfFisicaCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaCpf.setText("00000000000");
-        tfFisicaCpf.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaCpf.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCpfFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCpfFocusLost(evt);
             }
         });
         panelFisicaDadosRow2.add(tfFisicaCpf);
 
         panelPessoaFisica.add(panelFisicaDadosRow2);
-
-        panelFisicaInfoAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelFisicaInfoAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbFisicaInfoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelFisicaInfoAlertaHolder.add(lbFisicaInfoAlerta);
-
-        panelPessoaFisica.add(panelFisicaInfoAlertaHolder);
 
         panelFisicaLbEndrcHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -586,43 +566,52 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelFisicaEndrcRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbFisicaRua.setText("  Rua:");
+        lbFisicaRua.setText("  * Rua:");
         panelFisicaEndrcRow1.add(lbFisicaRua);
 
         tfFisicaRua.setColumns(20);
-        tfFisicaRua.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaRua.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaRuaKeyTyped(evt);
             }
         });
         panelFisicaEndrcRow1.add(tfFisicaRua);
 
-        lbFisicaNumero.setText("Número:");
+        lbFisicaNumero.setText("* Número:");
         panelFisicaEndrcRow1.add(lbFisicaNumero);
 
         tfFisicaNumero.setColumns(7);
-        tfFisicaNumero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaNumero.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaNumeroKeyTyped(evt);
             }
         });
         panelFisicaEndrcRow1.add(tfFisicaNumero);
 
-        lbFisicaCep.setText("CEP:");
+        lbFisicaCep.setText("* CEP:");
         panelFisicaEndrcRow1.add(lbFisicaCep);
 
         tfFisicaCep.setColumns(11);
-        try {
+        try
+        {
             tfFisicaCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaCep.setText("0000000000");
-        tfFisicaCep.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaCep.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCepFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCepFocusLost(evt);
             }
         });
@@ -632,23 +621,27 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelFisicaEndrcRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbFisicaBairro.setText("  Bairro:");
+        lbFisicaBairro.setText("  * Bairro:");
         panelFisicaEndrcRow2.add(lbFisicaBairro);
 
         tfFisicaBairro.setColumns(20);
-        tfFisicaBairro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaBairro.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaBairroKeyTyped(evt);
             }
         });
         panelFisicaEndrcRow2.add(tfFisicaBairro);
 
-        lbFisicaCidade.setText("Cidade:");
+        lbFisicaCidade.setText("* Cidade:");
         panelFisicaEndrcRow2.add(lbFisicaCidade);
 
         tfFisicaCidade.setColumns(20);
-        tfFisicaCidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaCidade.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaCidadeKeyTyped(evt);
             }
         });
@@ -658,21 +651,13 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelFisicaEndrcRow3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbFisicaEstado.setText("  Estado:");
+        lbFisicaEstado.setText("  * Estado:");
         panelFisicaEndrcRow3.add(lbFisicaEstado);
 
         cbFisicaEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "MG", "RJ", "PE", "RS", "MT", "DF" }));
         panelFisicaEndrcRow3.add(cbFisicaEstado);
 
         panelPessoaFisica.add(panelFisicaEndrcRow3);
-
-        panelFisicaEndrcAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelFisicaEndrcAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbFisicaEnderecoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelFisicaEndrcAlertaHolder.add(lbFisicaEnderecoAlerta);
-
-        panelPessoaFisica.add(panelFisicaEndrcAlertaHolder);
 
         panelFisicaLbConttsHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -686,41 +671,51 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         flowLayout1.setAlignOnBaseline(true);
         panelFisicaConttsRow1.setLayout(flowLayout1);
 
-        lbFisicaTelefone.setText("  Tel. Residencial:");
+        lbFisicaTelefone.setText("  * Tel. Residencial:");
         panelFisicaConttsRow1.add(lbFisicaTelefone);
 
         tfFisicaResidencial.setColumns(14);
-        try {
+        try
+        {
             tfFisicaResidencial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaResidencial.setText("0000000000");
-        tfFisicaResidencial.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaResidencial.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaResidencialFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaResidencialFocusLost(evt);
             }
         });
         panelFisicaConttsRow1.add(tfFisicaResidencial);
 
-        lbFisicaCelular.setText("  Celular:");
+        lbFisicaCelular.setText("  * Celular:");
         panelFisicaConttsRow1.add(lbFisicaCelular);
 
         tfFisicaCelular.setColumns(15);
-        try {
+        try
+        {
             tfFisicaCelular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfFisicaCelular.setText("00000000000");
-        tfFisicaCelular.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfFisicaCelular.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCelularFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfFisicaCelularFocusLost(evt);
             }
         });
@@ -730,26 +725,20 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelFisicaCottsRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbFisicaEmail.setText("  E-mail:");
+        lbFisicaEmail.setText("  * E-mail:");
         panelFisicaCottsRow2.add(lbFisicaEmail);
 
         tfFisicaEmail.setColumns(20);
-        tfFisicaEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfFisicaEmail.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfFisicaEmailKeyTyped(evt);
             }
         });
         panelFisicaCottsRow2.add(tfFisicaEmail);
 
         panelPessoaFisica.add(panelFisicaCottsRow2);
-
-        panelFisicaConttsAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelFisicaConttsAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbFisicaContatoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelFisicaConttsAlertaHolder.add(lbFisicaContatoAlerta);
-
-        panelPessoaFisica.add(panelFisicaConttsAlertaHolder);
 
         panelFisicaObs.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -768,25 +757,40 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelPessoaFisica.add(panelFisicaObs);
 
+        panelFisicaAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
+        panelFisicaAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lbFisicaAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbFisicaAlerta.setText("(*) Campos obrigatórios.");
+        panelFisicaAlertaHolder.add(lbFisicaAlerta);
+
+        panelPessoaFisica.add(panelFisicaAlertaHolder);
+
         btFisicaCadastrar.setText("Cadastrar");
-        btFisicaCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btFisicaCadastrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btFisicaCadastrarActionPerformed(evt);
             }
         });
         paneFisicalBotoes.add(btFisicaCadastrar);
 
         btFisicaLimpar.setText("Limpar");
-        btFisicaLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btFisicaLimpar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btFisicaLimparActionPerformed(evt);
             }
         });
         paneFisicalBotoes.add(btFisicaLimpar);
 
         btFisicaVisualizar.setText("Visualizar");
-        btFisicaVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btFisicaVisualizar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btFisicaVisualizarActionPerformed(evt);
             }
         });
@@ -810,13 +814,15 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelJuridicaDadosRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbJuridicaNomeComercial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbJuridicaNomeComercial.setText(" Nome Comercial: ");
+        lbJuridicaNomeComercial.setText(" * Nome Comercial: ");
         lbJuridicaNomeComercial.setToolTipText("");
         panelJuridicaDadosRow1.add(lbJuridicaNomeComercial);
 
         tfJuridicaNomeComercial.setColumns(42);
-        tfJuridicaNomeComercial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaNomeComercial.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaNomeComercialKeyTyped(evt);
             }
         });
@@ -827,36 +833,33 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelDadosRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbJuridicaCnpj.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbJuridicaCnpj.setText(" CNPJ: ");
+        lbJuridicaCnpj.setText(" * CNPJ: ");
         lbJuridicaCnpj.setToolTipText("");
         panelDadosRow2.add(lbJuridicaCnpj);
 
         tfJuridicaCnpj.setColumns(20);
-        try {
+        try
+        {
             tfJuridicaCnpj.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.###.###/####-##")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfJuridicaCnpj.setText("00000000000000");
-        tfJuridicaCnpj.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfJuridicaCnpj.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCnpjFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCnpjFocusLost(evt);
             }
         });
         panelDadosRow2.add(tfJuridicaCnpj);
 
         panelPessoaJuridica.add(panelDadosRow2);
-
-        panelJuridicaInfoAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelJuridicaInfoAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbJuridicaInfoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelJuridicaInfoAlertaHolder.add(lbJuridicaInfoAlerta);
-
-        panelPessoaJuridica.add(panelJuridicaInfoAlertaHolder);
 
         panelJuridicaLbEndrcHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -868,43 +871,52 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelEndrcRow1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbJuridicaRua.setText("  Rua:");
+        lbJuridicaRua.setText("  * Rua:");
         panelEndrcRow1.add(lbJuridicaRua);
 
         tfJuridicaRua.setColumns(20);
-        tfJuridicaRua.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaRua.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaRuaKeyTyped(evt);
             }
         });
         panelEndrcRow1.add(tfJuridicaRua);
 
-        lbJuridicaNumero.setText("Número:");
+        lbJuridicaNumero.setText("* Número:");
         panelEndrcRow1.add(lbJuridicaNumero);
 
         tfJuridicaNumero.setColumns(7);
-        tfJuridicaNumero.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaNumero.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaNumeroKeyTyped(evt);
             }
         });
         panelEndrcRow1.add(tfJuridicaNumero);
 
-        lbJuridicaCep.setText("CEP:");
+        lbJuridicaCep.setText("* CEP:");
         panelEndrcRow1.add(lbJuridicaCep);
 
         tfJuridicaCep.setColumns(11);
-        try {
+        try
+        {
             tfJuridicaCep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfJuridicaCep.setText("00000000");
-        tfJuridicaCep.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfJuridicaCep.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCepFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaCepFocusLost(evt);
             }
         });
@@ -914,23 +926,27 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelJuridicaEndrcRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbJuridicaBairro.setText("  Bairro:");
+        lbJuridicaBairro.setText("  * Bairro:");
         panelJuridicaEndrcRow2.add(lbJuridicaBairro);
 
         tfJuridicaBairro.setColumns(20);
-        tfJuridicaBairro.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaBairro.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaBairroKeyTyped(evt);
             }
         });
         panelJuridicaEndrcRow2.add(tfJuridicaBairro);
 
-        lbJuridicaCidade.setText("Cidade:");
+        lbJuridicaCidade.setText("* Cidade:");
         panelJuridicaEndrcRow2.add(lbJuridicaCidade);
 
         tfJuridicaCidade.setColumns(20);
-        tfJuridicaCidade.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaCidade.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaCidadeKeyTyped(evt);
             }
         });
@@ -940,21 +956,13 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelJuridicaEndrcRow3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbJuridicaEstado.setText("  Estado:");
+        lbJuridicaEstado.setText("  * Estado:");
         panelJuridicaEndrcRow3.add(lbJuridicaEstado);
 
         cbJuridicaEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "SP", "MG", "RJ", "PE", "RS", "MT", "DF" }));
         panelJuridicaEndrcRow3.add(cbJuridicaEstado);
 
         panelPessoaJuridica.add(panelJuridicaEndrcRow3);
-
-        panelJuridicaEndrcAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelJuridicaEndrcAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbJuridicaEnderecoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelJuridicaEndrcAlertaHolder.add(lbJuridicaEnderecoAlerta);
-
-        panelPessoaJuridica.add(panelJuridicaEndrcAlertaHolder);
 
         panelJuridicaLbConttsHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -969,44 +977,54 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         panelJuridicaConttsRow1.setLayout(flowLayout2);
 
         lbJuridicaTelefoneComercial.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbJuridicaTelefoneComercial.setText(" Tel. Comercial:");
+        lbJuridicaTelefoneComercial.setText(" * Tel. Comercial:");
         lbJuridicaTelefoneComercial.setToolTipText("");
         panelJuridicaConttsRow1.add(lbJuridicaTelefoneComercial);
 
         tfJuridicaTelefoneComercial.setColumns(15);
-        try {
+        try
+        {
             tfJuridicaTelefoneComercial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfJuridicaTelefoneComercial.setText("0000000000");
-        tfJuridicaTelefoneComercial.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfJuridicaTelefoneComercial.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaTelefoneComercialFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaTelefoneComercialFocusLost(evt);
             }
         });
         panelJuridicaConttsRow1.add(tfJuridicaTelefoneComercial);
 
         lbJuridicaFax.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbJuridicaFax.setText("FAX:");
+        lbJuridicaFax.setText("* FAX:");
         lbJuridicaFax.setToolTipText("");
         panelJuridicaConttsRow1.add(lbJuridicaFax);
 
         tfJuridicaFax.setColumns(15);
-        try {
+        try
+        {
             tfJuridicaFax.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)####-####")));
-        } catch (java.text.ParseException ex) {
+        } catch (java.text.ParseException ex)
+        {
             ex.printStackTrace();
         }
         tfJuridicaFax.setText("0000000000");
-        tfJuridicaFax.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+        tfJuridicaFax.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaFaxFocusGained(evt);
             }
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(java.awt.event.FocusEvent evt)
+            {
                 tfJuridicaFaxFocusLost(evt);
             }
         });
@@ -1016,26 +1034,20 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelJuridicaConttsRow2.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        lbJuridicaEmail.setText("  E-mail:");
+        lbJuridicaEmail.setText("  * E-mail:");
         panelJuridicaConttsRow2.add(lbJuridicaEmail);
 
         tfJuridicaEmail.setColumns(20);
-        tfJuridicaEmail.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+        tfJuridicaEmail.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
                 tfJuridicaEmailKeyTyped(evt);
             }
         });
         panelJuridicaConttsRow2.add(tfJuridicaEmail);
 
         panelPessoaJuridica.add(panelJuridicaConttsRow2);
-
-        panelJuridicaConttsAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
-        panelJuridicaConttsAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbJuridicaContatoAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        panelJuridicaConttsAlertaHolder.add(lbJuridicaContatoAlerta);
-
-        panelPessoaJuridica.add(panelJuridicaConttsAlertaHolder);
 
         panelJuridicaObs.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -1054,25 +1066,40 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
         panelPessoaJuridica.add(panelJuridicaObs);
 
+        panelJuridicaAlertaHolder.setPreferredSize(new java.awt.Dimension(286, 24));
+        panelJuridicaAlertaHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lbJuridicaAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbJuridicaAlerta.setText("(*) Campos obrigatórios.");
+        panelJuridicaAlertaHolder.add(lbJuridicaAlerta);
+
+        panelPessoaJuridica.add(panelJuridicaAlertaHolder);
+
         btJuridicaCadastrar.setText("Cadastrar");
-        btJuridicaCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btJuridicaCadastrar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btJuridicaCadastrarActionPerformed(evt);
             }
         });
         panelJuridicaBotoes.add(btJuridicaCadastrar);
 
         btJuridicaLimpar.setText("Limpar");
-        btJuridicaLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btJuridicaLimpar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btJuridicaLimparActionPerformed(evt);
             }
         });
         panelJuridicaBotoes.add(btJuridicaLimpar);
 
         btJuridicaVisualizar.setText("Visualizar");
-        btJuridicaVisualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btJuridicaVisualizar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btJuridicaVisualizarActionPerformed(evt);
             }
         });
@@ -1275,7 +1302,7 @@ public class FormPessoaPanel extends javax.swing.JPanel {
 
     private void btJuridicaCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btJuridicaCadastrarActionPerformed
         boolean verifica = validaJuridicaDados();
-        verifica = validaEndereco() && verifica;
+        verifica = validaJuridicaEndereco() && verifica;
         verifica = validaContatos() && verifica;
         if(verifica)
         {
@@ -1378,37 +1405,33 @@ public class FormPessoaPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbDadosPessoais;
+    private javax.swing.JLabel lbFisicaAlerta;
     private javax.swing.JLabel lbFisicaBairro;
     private javax.swing.JLabel lbFisicaCelular;
     private javax.swing.JLabel lbFisicaCep;
     private javax.swing.JLabel lbFisicaCidade;
-    private javax.swing.JLabel lbFisicaContatoAlerta;
     private javax.swing.JLabel lbFisicaContatos;
     private javax.swing.JLabel lbFisicaCpf;
     private javax.swing.JLabel lbFisicaEmail;
-    private javax.swing.JLabel lbFisicaEnderecoAlerta;
     private javax.swing.JLabel lbFisicaEstado;
     private javax.swing.JLabel lbFisicaFisicaEndereco;
-    private javax.swing.JLabel lbFisicaInfoAlerta;
     private javax.swing.JLabel lbFisicaNome;
     private javax.swing.JLabel lbFisicaNumero;
     private javax.swing.JLabel lbFisicaObs;
     private javax.swing.JLabel lbFisicaRg;
     private javax.swing.JLabel lbFisicaRua;
     private javax.swing.JLabel lbFisicaTelefone;
+    private javax.swing.JLabel lbJuridicaAlerta;
     private javax.swing.JLabel lbJuridicaBairro;
     private javax.swing.JLabel lbJuridicaCep;
     private javax.swing.JLabel lbJuridicaCidade;
     private javax.swing.JLabel lbJuridicaCnpj;
-    private javax.swing.JLabel lbJuridicaContatoAlerta;
     private javax.swing.JLabel lbJuridicaContatos;
     private javax.swing.JLabel lbJuridicaDados;
     private javax.swing.JLabel lbJuridicaEmail;
     private javax.swing.JLabel lbJuridicaEndereco;
-    private javax.swing.JLabel lbJuridicaEnderecoAlerta;
     private javax.swing.JLabel lbJuridicaEstado;
     private javax.swing.JLabel lbJuridicaFax;
-    private javax.swing.JLabel lbJuridicaInfoAlerta;
     private javax.swing.JLabel lbJuridicaNomeComercial;
     private javax.swing.JLabel lbJuridicaNumero;
     private javax.swing.JLabel lbJuridicaObs;
@@ -1418,29 +1441,25 @@ public class FormPessoaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel paneFisicalBotoes;
     private javax.swing.JPanel panelDadosRow2;
     private javax.swing.JPanel panelEndrcRow1;
-    private javax.swing.JPanel panelFisicaConttsAlertaHolder;
+    private javax.swing.JPanel panelFisicaAlertaHolder;
     private javax.swing.JPanel panelFisicaConttsRow1;
     private javax.swing.JPanel panelFisicaCottsRow2;
     private javax.swing.JPanel panelFisicaDadosRow1;
     private javax.swing.JPanel panelFisicaDadosRow2;
-    private javax.swing.JPanel panelFisicaEndrcAlertaHolder;
     private javax.swing.JPanel panelFisicaEndrcRow1;
     private javax.swing.JPanel panelFisicaEndrcRow2;
     private javax.swing.JPanel panelFisicaEndrcRow3;
-    private javax.swing.JPanel panelFisicaInfoAlertaHolder;
     private javax.swing.JPanel panelFisicaLbConttsHolder;
     private javax.swing.JPanel panelFisicaLbDadosHolder;
     private javax.swing.JPanel panelFisicaLbEndrcHolder;
     private javax.swing.JPanel panelFisicaObs;
+    private javax.swing.JPanel panelJuridicaAlertaHolder;
     private javax.swing.JPanel panelJuridicaBotoes;
-    private javax.swing.JPanel panelJuridicaConttsAlertaHolder;
     private javax.swing.JPanel panelJuridicaConttsRow1;
     private javax.swing.JPanel panelJuridicaConttsRow2;
     private javax.swing.JPanel panelJuridicaDadosRow1;
-    private javax.swing.JPanel panelJuridicaEndrcAlertaHolder;
     private javax.swing.JPanel panelJuridicaEndrcRow2;
     private javax.swing.JPanel panelJuridicaEndrcRow3;
-    private javax.swing.JPanel panelJuridicaInfoAlertaHolder;
     private javax.swing.JPanel panelJuridicaLbConttsHolder;
     private javax.swing.JPanel panelJuridicaLbDadosHolder;
     private javax.swing.JPanel panelJuridicaLbEndrcHolder;

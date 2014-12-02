@@ -27,6 +27,7 @@ public class VisualizaPessoaJuridica extends javax.swing.JFrame {
      */
     public VisualizaPessoaJuridica(PessoaJuridica cliente) {
         initComponents();
+        this.cliente = cliente;
         this.setLocationRelativeTo(null);
         lbNomeComercialText.setText(cliente.getNomeFantasia());
         lbCnpjText.setText(cliente.getCNPJ());
@@ -53,7 +54,8 @@ public class VisualizaPessoaJuridica extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
@@ -91,9 +93,9 @@ public class VisualizaPessoaJuridica extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         taObsText = new javax.swing.JTextArea();
         panelBotoes = new javax.swing.JPanel();
-        btSair = new javax.swing.JButton();
         btCarro = new javax.swing.JButton();
         btOS = new javax.swing.JButton();
+        btSair = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
 
@@ -193,46 +195,58 @@ public class VisualizaPessoaJuridica extends javax.swing.JFrame {
 
         getContentPane().add(panelInfoRow8);
 
-        btSair.setText("Sair");
-        btSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btSairActionPerformed(evt);
-            }
-        });
-        panelBotoes.add(btSair);
-
         btCarro.setText("Ver Carros");
-        btCarro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btCarro.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btCarroActionPerformed(evt);
             }
         });
         panelBotoes.add(btCarro);
 
         btOS.setText("Ver OS");
-        btOS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btOS.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 btOSActionPerformed(evt);
             }
         });
         panelBotoes.add(btOS);
 
+        btSair.setText("Sair");
+        btSair.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btSairActionPerformed(evt);
+            }
+        });
+        panelBotoes.add(btSair);
+
         getContentPane().add(panelBotoes);
+
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(450, 100));
 
         tabela.setBackground(new java.awt.Color(204, 204, 204));
         tabela.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {},
                 {},
                 {},
                 {}
             },
-            new String [] {
+            new String []
+            {
 
             }
         ));
-        tabela.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        tabela.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 tabelaMouseClicked(evt);
             }
         });

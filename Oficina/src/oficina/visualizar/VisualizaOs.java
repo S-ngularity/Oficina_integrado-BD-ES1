@@ -50,7 +50,7 @@ public class VisualizaOs extends javax.swing.JFrame
         lbDataFimText.setText(osTemp.getDataFim());
         lbHoraInicioText.setText(osTemp.getHoraInicio());
         lbHoraFimText.setText(osTemp.getHoraFim());
-        lbTipoText.setText(osTemp.getTipo());
+        lbTipoText.setText(osTemp.getEstado());
         lbEstadoText.setText(osTemp.getEstado());
         
         DefaultListModel d = (DefaultListModel) lServicos.getModel();
@@ -75,7 +75,7 @@ public class VisualizaOs extends javax.swing.JFrame
         osTemp.setDataFim(lbDataFimText.getText());
         osTemp.setHoraInicio(lbHoraInicioText.getText());
         osTemp.setHoraFim(lbHoraFimText.getText());
-        osTemp.setTipo(lbTipoText.getText());
+        osTemp.setEstado(lbTipoText.getText());
         osTemp.setEstado(lbEstadoText.getText());
 
         DefaultListModel d = (DefaultListModel) lServicos.getModel();

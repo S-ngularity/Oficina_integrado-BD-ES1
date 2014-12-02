@@ -50,7 +50,9 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         buttonGroupFisica = new javax.swing.ButtonGroup();
         buttonGroupJuridica = new javax.swing.ButtonGroup();
+        panelTitulo = new javax.swing.JPanel();
         lbTitulo = new javax.swing.JLabel();
+        panelTabbedHolder = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         panelBuscaOs = new javax.swing.JPanel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
@@ -97,13 +99,17 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         tabelaJuridica = new javax.swing.JTable();
 
         setPreferredSize(new java.awt.Dimension(550, 550));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.Y_AXIS));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.PAGE_AXIS));
 
         lbTitulo.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lbTitulo.setText("Busca");
-        add(lbTitulo);
+        panelTitulo.add(lbTitulo);
 
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(400, 200));
+        add(panelTitulo);
+
+        panelTabbedHolder.setPreferredSize(new java.awt.Dimension(550, 505));
+
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(540, 497));
 
         panelBuscaOs.setLayout(new javax.swing.BoxLayout(panelBuscaOs, javax.swing.BoxLayout.PAGE_AXIS));
         panelBuscaOs.add(filler2);
@@ -116,7 +122,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaOs.add(panelNumOs);
 
-        btBuscarOs.setText("Buscar");
+        btBuscarOs.setText("Procurar");
         btBuscarOs.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -193,7 +199,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaCarro.add(panelPlaca);
 
-        btBuscarPlaca.setText("Buscar");
+        btBuscarPlaca.setText("Procurar");
         btBuscarPlaca.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -308,7 +314,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaFisica.add(jPanel1);
 
-        btCpf.setText("Buscar");
+        btCpf.setText("Procurar");
         btCpf.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -422,7 +428,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         panelBuscaJuridica.add(jPanel2);
 
-        btBuscarCnpj.setText("Buscar");
+        btBuscarCnpj.setText("Procurar");
         btBuscarCnpj.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -480,7 +486,9 @@ public class FormBuscaPanel extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("Pessoa Jurídica", panelBuscaJuridica);
 
-        add(jTabbedPane1);
+        panelTabbedHolder.add(jTabbedPane1);
+
+        add(panelTabbedHolder);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarOsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarOsActionPerformed
@@ -488,16 +496,16 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         try {this.osLista.clear();}catch(RuntimeException e){this.osLista = new ArrayList<OrdemDeServico>();}
         ConexaoBd bd = new ConexaoBd();
         os = bd.buscaOSCod(Integer.parseInt(tfNumOs.getText()));
-        DefaultTableModel model = (DefaultTableModel)tabelaOS.getModel(); 
+        DefaultTableModel model = (DefaultTableModel)tabelaOS.getModel();
         model.setNumRows(0);
         
         if(os != null)
-        {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getTipo()});
+        {   model.addRow(new Object[]{os.getCodigoOs(), os.getPlacaCarro(),os.getEstado()});
             this.osLista.add(os);
         }
         
         else
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+            JOptionPane.showMessageDialog(null, "Número da Ordem de Serviço não é válido.");
     }//GEN-LAST:event_btBuscarOsActionPerformed
 
     private void tfPlacaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfPlacaKeyTyped
@@ -543,7 +551,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         }
         
         else
-            JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+            JOptionPane.showMessageDialog(null, "Placa não é válida ou não está cadastrada.");
     }//GEN-LAST:event_btBuscarPlacaActionPerformed
 
     private void tfFisicaCpfFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfFisicaCpfFocusGained
@@ -574,7 +582,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
             }
 
             else
-                JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+                JOptionPane.showMessageDialog(null, "CPF não é válido ou não está cadastrado.");
         }
         if(radioFisicaNome.isSelected())
         {
@@ -626,7 +634,7 @@ public class FormBuscaPanel extends javax.swing.JPanel {
             }
             
             else
-                JOptionPane.showMessageDialog(null, "Busca não encontrou resultados.");
+                JOptionPane.showMessageDialog(null, "CNPJ não é válido ou não está cadastrado.");
         }
         if(radioJuridicaNome.isSelected())
         {
@@ -744,6 +752,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelCpf;
     private javax.swing.JPanel panelNumOs;
     private javax.swing.JPanel panelPlaca;
+    private javax.swing.JPanel panelTabbedHolder;
+    private javax.swing.JPanel panelTitulo;
     private javax.swing.JRadioButton radioFisicaCPF;
     private javax.swing.JRadioButton radioFisicaNome;
     private javax.swing.JRadioButton radioJuridicaCNPJ;
