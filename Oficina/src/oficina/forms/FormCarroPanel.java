@@ -128,7 +128,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         panelBotoes = new javax.swing.JPanel();
         btCadastrar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
-        btVisualizar = new javax.swing.JButton();
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -306,16 +305,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         });
         panelBotoes.add(btLimpar);
 
-        btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btVisualizarActionPerformed(evt);
-            }
-        });
-        panelBotoes.add(btVisualizar);
-
         jPanel1.add(panelBotoes);
 
         add(jPanel1);
@@ -449,22 +438,31 @@ public class FormCarroPanel extends javax.swing.JPanel {
             ConexaoBd bd = new ConexaoBd();
             // busca codModelo noBD através do nome do modelo e o insere no carroTemp
             bd.buscaCodModelo(cboxModelo.getSelectedItem().toString(), carroTemp); 
-            bd.cadastraCarro(carroTemp, this.funcionario);
+            
+            if(bd.buscaCarroPlaca(carroTemp.getPlaca()) != null)
+            {
+                 JOptionPane.showMessageDialog(null, "Já existe um carro com a mesma placa cadastrado no sistema.");
+            }
+            
+            else
+            {
+                bd.cadastraCarro(carroTemp, this.funcionario);
 
-            lbClienteText.setText("NÃO INFORMADO");
-            lbClienteText.setForeground(Color.black);
-            clienteCpfCnpj = null;
-            tfPlaca.setText(null);
-            tfAno.setText(null);
-            lbPlacaAlerta.setText("");
-            lbAnoAlerta.setText("");
-            taObs.setText("");
-            cboxMarca.setSelectedIndex(0);
-            cboxModelo.setSelectedIndex(0);
-            cboxCor.setSelectedIndex(0);
-            lbAlerta.setForeground(Color.black);
+                lbClienteText.setText("NÃO INFORMADO");
+                lbClienteText.setForeground(Color.black);
+                clienteCpfCnpj = null;
+                tfPlaca.setText(null);
+                tfAno.setText(null);
+                lbPlacaAlerta.setText("");
+                lbAnoAlerta.setText("");
+                taObs.setText("");
+                cboxMarca.setSelectedIndex(0);
+                cboxModelo.setSelectedIndex(0);
+                cboxCor.setSelectedIndex(0);
+                lbAlerta.setForeground(Color.black);
 
-            JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso!");
+                JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso!");
+            }
         }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
@@ -486,19 +484,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
         lbAlerta.setForeground(Color.black);
     }//GEN-LAST:event_btLimparActionPerformed
 
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        VisualizaCarro v;
-
-        if(carroTemp != null){
-            v = new VisualizaCarro(carroTemp);
-            v.setVisible(true);
-        }
-
-        else{
-            JOptionPane.showMessageDialog(null, "Você deve cadastrar o carro antes de visualizar");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
-
     private void cboxMarcaItemStateChanged(java.awt.event.ItemEvent evt)//GEN-FIRST:event_cboxMarcaItemStateChanged
     {//GEN-HEADEREND:event_cboxMarcaItemStateChanged
         ConexaoBd bd = new ConexaoBd();
@@ -510,7 +495,6 @@ public class FormCarroPanel extends javax.swing.JPanel {
     private javax.swing.JButton btCadastrar;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btSelecionarCliente;
-    private javax.swing.JButton btVisualizar;
     private javax.swing.JComboBox cboxCor;
     private javax.swing.JComboBox cboxMarca;
     private javax.swing.JComboBox cboxModelo;

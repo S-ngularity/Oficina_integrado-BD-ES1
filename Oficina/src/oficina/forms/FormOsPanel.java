@@ -98,7 +98,6 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelBotoes = new javax.swing.JPanel();
         btCadastrar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
-        btVisualizar = new javax.swing.JButton();
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -273,16 +272,6 @@ public class FormOsPanel extends javax.swing.JPanel {
         });
         panelBotoes.add(btLimpar);
 
-        btVisualizar.setText("Visualizar");
-        btVisualizar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btVisualizarActionPerformed(evt);
-            }
-        });
-        panelBotoes.add(btVisualizar);
-
         jPanel1.add(panelBotoes);
 
         add(jPanel1);
@@ -442,20 +431,6 @@ public class FormOsPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btLimparActionPerformed
 
-    private void btVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVisualizarActionPerformed
-        if(os != null)
-        {
-            VisualizaOs v = new VisualizaOs(os);
-            v.setVisible(true);
-        }
-
-        else
-        {
-            JOptionPane.showMessageDialog(null, 
-                "Você deve cadastrar a ordem de serviço antes de visualizar");
-        }
-    }//GEN-LAST:event_btVisualizarActionPerformed
-
     private void tfKmEntradaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfKmEntradaKeyTyped
         // TODO add your handling code here:
         if(tfKmEntrada.getText().length() > 9 || !(Character.isDigit(evt.getKeyChar()) || evt.getKeyChar() == '.'))
@@ -471,7 +446,6 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JButton btDel;
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btSelecionarCarro;
-    private javax.swing.JButton btVisualizar;
     private javax.swing.JComboBox cboxEstado;
     private javax.swing.JComboBox cboxTipo;
     private javax.swing.JPanel jPanel1;

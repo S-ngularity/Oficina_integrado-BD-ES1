@@ -415,7 +415,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         paneFisicalBotoes = new javax.swing.JPanel();
         btFisicaCadastrar = new javax.swing.JButton();
         btFisicaLimpar = new javax.swing.JButton();
-        btFisicaVisualizar = new javax.swing.JButton();
         panelPessoaJuridica = new javax.swing.JPanel();
         panelJuridicaLbDadosHolder = new javax.swing.JPanel();
         lbJuridicaDados = new javax.swing.JLabel();
@@ -785,16 +784,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
             }
         });
         paneFisicalBotoes.add(btFisicaLimpar);
-
-        btFisicaVisualizar.setText("Visualizar");
-        btFisicaVisualizar.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                btFisicaVisualizarActionPerformed(evt);
-            }
-        });
-        paneFisicalBotoes.add(btFisicaVisualizar);
 
         panelPessoaFisica.add(paneFisicalBotoes);
 
@@ -1227,15 +1216,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
         fisicaLimpar();
     }//GEN-LAST:event_btFisicaLimparActionPerformed
 
-    private void btFisicaVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFisicaVisualizarActionPerformed
-        if(clienteFisico != null)
-        {
-            new VisualizaPessoaFisica(clienteFisico).setVisible(true);
-        }
-        else
-            JOptionPane.showMessageDialog(null, "Cliente não cadastrado!");
-    }//GEN-LAST:event_btFisicaVisualizarActionPerformed
-
     private void tfJuridicaCnpjFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfJuridicaCnpjFocusGained
         if("00.000.000/0000-00".equals(tfJuridicaCnpj.getText()))
         {
@@ -1394,7 +1374,6 @@ public class FormPessoaPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btFisicaCadastrar;
     private javax.swing.JButton btFisicaLimpar;
-    private javax.swing.JButton btFisicaVisualizar;
     private javax.swing.JButton btJuridicaCadastrar;
     private javax.swing.JButton btJuridicaLimpar;
     private javax.swing.JButton btJuridicaVisualizar;
