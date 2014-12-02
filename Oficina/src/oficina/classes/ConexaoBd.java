@@ -95,6 +95,26 @@ public class ConexaoBd {
        }
          return -1;
     }
+    
+    public String buscaNomeMecanico(int codFuncionario){
+        String selectMecanico = "SELECT nomeFuncionario FROM Funcionario where codFuncionario ='"+codFuncionario+"';";
+        ResultSet busca;
+        
+         try{
+           st.execute(selectMecanico);
+           busca =  st.getResultSet();
+           
+           if(busca.next())
+           {              
+             return busca.getString(1);
+              
+           }
+
+       }catch(SQLException e){
+           JOptionPane.showMessageDialog(null, "Erro ao executar selecao em buscaNomeMecanico: "+e.getMessage());
+       }
+         return null;
+    }
     public void preencheCbMecanico(JComboBox cbMecanico){
         String selectMecanico = "SELECT nomeFuncionario FROM Funcionario where atendente = FALSE;";
         ResultSet busca;
@@ -364,6 +384,27 @@ public class ConexaoBd {
     }
         return null;
     }
+    
+    public void buscaServicosOS(OrdemDeServico os){
+        /*String selectServicos = "SELECT codFuncionario, descricaoServico, preco FROM ServicoFuncionarioOS"
+                +"WHERE codOS="+ os.getCodigoOs()+ ";";
+        ResultSet busca;
+        Servico serv;
+        
+        try{
+           st.execute(selectServicos);
+           busca = st.getResultSet();
+           while(busca.next())
+           {
+               serv = new Servico(busca.getString(2), busca.getString(3), buscaNomeMecanico(busca.getInt(1)));
+               serv.setCodMecanico(busca.getInt(1));
+               os.servicos.add(serv);
+               
+           }
+    }catch(SQLException e){
+      JOptionPane.showMessageDialog(null, "Erro ao executar buscaServicosOS: "+e.getMessage());
+    }*/
+    }
     //Preenche objeto OS com dados buscados no BD
     private void preencheOS(OrdemDeServico os, ResultSet busca) throws SQLException{
         os.setCodigoOs(busca.getInt(1));
@@ -375,6 +416,7 @@ public class ConexaoBd {
         os.setDataFim(busca.getString(10));
         os.setValorTotal(busca.getString(8));
         os.setEstado(buscaNomeestadoOS(busca.getInt(5)));
+        buscaServicosOS(os);
     }
     public OrdemDeServico buscaOSCod(int CodigoOS){
         String selectOS = "SELECT * from OrdemDeServico where codOS = "+ CodigoOS + ";";
@@ -438,6 +480,8 @@ public class ConexaoBd {
        }
         return osList;
     }
+    
+    
     
     
     //==========================CLIENTE=========================================

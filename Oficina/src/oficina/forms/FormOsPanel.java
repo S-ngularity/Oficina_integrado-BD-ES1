@@ -74,18 +74,12 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelCliente = new javax.swing.JPanel();
         lbCliente = new javax.swing.JLabel();
         lbClienteText = new javax.swing.JLabel();
-        panelTipo = new javax.swing.JPanel();
-        lbTipo = new javax.swing.JLabel();
-        cboxTipo = new javax.swing.JComboBox();
         panelEstado = new javax.swing.JPanel();
         lbEstado = new javax.swing.JLabel();
         cboxEstado = new javax.swing.JComboBox();
         panelKmEntrada = new javax.swing.JPanel();
         lbKmEntrada = new javax.swing.JLabel();
         tfKmEntrada = new javax.swing.JTextField();
-        panelAlerta = new javax.swing.JPanel();
-        lbAlerta = new javax.swing.JLabel();
-        panelHolderServicos = new javax.swing.JPanel();
         panelServicos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lServicos = new javax.swing.JList();
@@ -95,6 +89,8 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelValor = new javax.swing.JPanel();
         lbValor = new javax.swing.JLabel();
         lbValorText = new javax.swing.JLabel();
+        panelAlerta = new javax.swing.JPanel();
+        lbAlerta = new javax.swing.JLabel();
         panelBotoes = new javax.swing.JPanel();
         btCadastrar = new javax.swing.JButton();
         btLimpar = new javax.swing.JButton();
@@ -140,22 +136,12 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         panelInfo.add(panelCliente);
 
-        panelTipo.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbTipo.setText("* Tipo: ");
-        panelTipo.add(lbTipo);
-
-        cboxTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Revisão", "Revisão mais Problema", "Problema", "Retorno" }));
-        panelTipo.add(cboxTipo);
-
-        panelInfo.add(panelTipo);
-
         panelEstado.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         lbEstado.setText("Estado: ");
         panelEstado.add(lbEstado);
 
-        cboxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pendente para orçamento", "Pendente para aprovação", "Em atendimento", "Pendente pra pagamento", "Finalizada", "Cancelada" }));
+        cboxEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pendente para orçamento", "Pendente para aprovação", "Em atendimento", "Pendente para pagamento", "Finalizada", "Cancelada" }));
         cboxEstado.setEnabled(false);
         panelEstado.add(cboxEstado);
 
@@ -177,19 +163,6 @@ public class FormOsPanel extends javax.swing.JPanel {
         panelKmEntrada.add(tfKmEntrada);
 
         panelInfo.add(panelKmEntrada);
-
-        panelAlerta.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-
-        lbAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lbAlerta.setText("(*) Campos obrigatórios.");
-        lbAlerta.setPreferredSize(new java.awt.Dimension(280, 14));
-        panelAlerta.add(lbAlerta);
-
-        panelInfo.add(panelAlerta);
-
-        panelHolderInside.add(panelInfo);
-
-        panelHolder.add(panelHolderInside);
 
         panelServicos.setBorder(javax.swing.BorderFactory.createTitledBorder("Serviços:"));
         panelServicos.setLayout(new javax.swing.BoxLayout(panelServicos, javax.swing.BoxLayout.PAGE_AXIS));
@@ -246,9 +219,20 @@ public class FormOsPanel extends javax.swing.JPanel {
 
         panelServicos.add(panelValor);
 
-        panelHolderServicos.add(panelServicos);
+        panelInfo.add(panelServicos);
 
-        panelHolder.add(panelHolderServicos);
+        panelAlerta.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        lbAlerta.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lbAlerta.setText("(*) Campos obrigatórios.");
+        lbAlerta.setPreferredSize(new java.awt.Dimension(280, 14));
+        panelAlerta.add(lbAlerta);
+
+        panelInfo.add(panelAlerta);
+
+        panelHolderInside.add(panelInfo);
+
+        panelHolder.add(panelHolderInside);
 
         jPanel1.add(panelHolder);
 
@@ -404,7 +388,7 @@ public class FormOsPanel extends javax.swing.JPanel {
             placa = null;
             lbClienteText.setText("NÃO INFORMADO");
             clienteCpfCnpj = null;
-            cboxTipo.setSelectedIndex(0);
+            //cboxTipo.setSelectedIndex(0);
 
             JOptionPane.showMessageDialog(null, "Ordem de serviço cadastrada com sucesso!");
         }
@@ -421,7 +405,7 @@ public class FormOsPanel extends javax.swing.JPanel {
         placa = null;
         lbClienteText.setText("NÃO INFORMADO");
         clienteCpfCnpj = null;
-        cboxTipo.setSelectedIndex(0);
+        //cboxTipo.setSelectedIndex(0);
 
         DefaultListModel d = (DefaultListModel) lServicos.getModel();
 
@@ -447,7 +431,6 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JButton btLimpar;
     private javax.swing.JButton btSelecionarCarro;
     private javax.swing.JComboBox cboxEstado;
-    private javax.swing.JComboBox cboxTipo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList lServicos;
@@ -457,7 +440,6 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lbClienteText;
     private javax.swing.JLabel lbEstado;
     private javax.swing.JLabel lbKmEntrada;
-    private javax.swing.JLabel lbTipo;
     private javax.swing.JLabel lbTitulo;
     private javax.swing.JLabel lbValor;
     private javax.swing.JLabel lbValorText;
@@ -469,11 +451,9 @@ public class FormOsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel panelEstado;
     private javax.swing.JPanel panelHolder;
     private javax.swing.JPanel panelHolderInside;
-    private javax.swing.JPanel panelHolderServicos;
     private javax.swing.JPanel panelInfo;
     private javax.swing.JPanel panelKmEntrada;
     private javax.swing.JPanel panelServicos;
-    private javax.swing.JPanel panelTipo;
     private javax.swing.JPanel panelTitulo;
     private javax.swing.JPanel panelValor;
     private javax.swing.JTextField tfKmEntrada;

@@ -261,7 +261,7 @@ public class VisualizaCarro extends javax.swing.JFrame
          if(evt.getClickCount() == 2)
         {
             OrdemDeServico os = this.osLista.get(tabela.getSelectedRow());
-              new VisualizaOs(os).setVisible(true);
+              new VisualizaOs(os, false).setVisible(true);
             
         }
     }//GEN-LAST:event_tabelaMouseClicked

@@ -33,6 +33,10 @@ public class formServicoModal extends javax.swing.JDialog
         super(parent, modal);
         initComponents();
         
+        ConexaoBd bd = new ConexaoBd();
+        bd.preencheCbMecanico(cbMecanico);
+        cbMecanico.setSelectedItem(s.getNomeMecanico());
+       
         taDescr.setText(s.getNomeServico());
         tfPreco.setText(s.getPreco());
         tfPreco.setEnabled(false);
@@ -134,8 +138,7 @@ public class formServicoModal extends javax.swing.JDialog
     }// </editor-fold>//GEN-END:initComponents
 
     private void btOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btOkActionPerformed
-        if(taDescr.getText().length() == 0 
-                || tfPreco.getText().length() == 0)
+        if(taDescr.getText().length() == 0 || tfPreco.getText().length() == 0)
         {
             lbAlerta.setText("Todos os campos devem ser preenchidos.");
         }

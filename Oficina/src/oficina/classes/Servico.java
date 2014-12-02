@@ -26,7 +26,7 @@ public class Servico
     @Override
     public String toString() // para lista do formOs
     {
-        return "R$ " + this.preco + ",00" + " | " + this.nomeServico;
+        return "R$ " + this.preco + ",00" + " | " + this.nomeMecanico + " | " + this.nomeServico;
     }
 
     /**

@@ -10,6 +10,7 @@ import oficina.classes.Funcionario;
 import java.awt.Color;
 import java.util.Random;
 import javax.swing.JOptionPane;
+import oficina.classes.BackupPgSQL;
 import oficina.forms.FormBuscaPanel;
 import oficina.forms.FormCarroPanel;
 import oficina.forms.FormOsPanel;
@@ -64,6 +65,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelMidHolderInside = new javax.swing.JPanel();
         panelMid = new javax.swing.JPanel();
         panelBottom = new javax.swing.JPanel();
+        panelBottomStuffHolder = new javax.swing.JPanel();
         lbIconUsuario = new javax.swing.JLabel();
         paneTextHolder = new javax.swing.JPanel();
         paneUsuario = new javax.swing.JPanel();
@@ -74,6 +76,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelPermissao = new javax.swing.JPanel();
         lbPermissao = new javax.swing.JLabel();
         lbPermissaoText = new javax.swing.JLabel();
+        panelBackupHolder = new javax.swing.JPanel();
+        btBackup = new javax.swing.JButton();
         panelLeft = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         btBusca = new javax.swing.JButton();
@@ -102,9 +106,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         panelBottom.setLayout(new javax.swing.BoxLayout(panelBottom, javax.swing.BoxLayout.LINE_AXIS));
 
+        panelBottomStuffHolder.setLayout(new javax.swing.BoxLayout(panelBottomStuffHolder, javax.swing.BoxLayout.LINE_AXIS));
+
         lbIconUsuario.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         lbIconUsuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/oficina/resources/login.png"))); // NOI18N
-        panelBottom.add(lbIconUsuario);
+        panelBottomStuffHolder.add(lbIconUsuario);
 
         paneTextHolder.setLayout(new javax.swing.BoxLayout(paneTextHolder, javax.swing.BoxLayout.PAGE_AXIS));
 
@@ -140,7 +146,23 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         paneTextHolder.add(panelPermissao);
 
-        panelBottom.add(paneTextHolder);
+        panelBottomStuffHolder.add(paneTextHolder);
+
+        panelBackupHolder.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 14));
+
+        btBackup.setText("Backup");
+        btBackup.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btBackupActionPerformed(evt);
+            }
+        });
+        panelBackupHolder.add(btBackup);
+
+        panelBottomStuffHolder.add(panelBackupHolder);
+
+        panelBottom.add(panelBottomStuffHolder);
 
         getContentPane().add(panelBottom, java.awt.BorderLayout.PAGE_END);
 
@@ -250,7 +272,31 @@ public class MenuPrincipal extends javax.swing.JFrame {
         panelMid.setPreferredSize(panelBusca.getPreferredSize());
     }//GEN-LAST:event_btBuscaActionPerformed
 
+    private void btBackupActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_btBackupActionPerformed
+    {//GEN-HEADEREND:event_btBackupActionPerformed
+        int answer = JOptionPane.showConfirmDialog(
+            null,
+            "Deseja realizar o Backup agora?",
+            "Backup",
+            JOptionPane.YES_NO_OPTION);
+
+        if(answer == JOptionPane.YES_OPTION){
+            BackupPgSQL backup;
+        
+            backup = new BackupPgSQL();
+        
+            //backup.realizarBackup();
+            backup.run();
+            
+            JOptionPane.showMessageDialog(null, "Backup realizado.");
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Backup não realizado");
+        }
+    }//GEN-LAST:event_btBackupActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btBackup;
     private javax.swing.JButton btBusca;
     private javax.swing.JButton btCadCarro;
     private javax.swing.JButton btCadOs;
@@ -266,7 +312,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lbUsuarioText;
     private javax.swing.JPanel paneTextHolder;
     private javax.swing.JPanel paneUsuario;
+    private javax.swing.JPanel panelBackupHolder;
     private javax.swing.JPanel panelBottom;
+    private javax.swing.JPanel panelBottomStuffHolder;
     private javax.swing.JPanel panelLeft;
     private javax.swing.JPanel panelMid;
     private javax.swing.JPanel panelMidHolder;

@@ -320,7 +320,7 @@ public class VisualizaPessoaFisica extends javax.swing.JFrame {
             if(tabelaOS)
             {
                 OrdemDeServico os = this.osLista.get(tabela.getSelectedRow());
-                  new VisualizaOs(os).setVisible(true);
+                  new VisualizaOs(os, false).setVisible(true);
             }
         
             else

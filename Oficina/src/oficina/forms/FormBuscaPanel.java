@@ -729,9 +729,8 @@ public class FormBuscaPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(evt.getClickCount() == 2)
         {
-            OrdemDeServico os = this.osLista.get(tabelaOS.getSelectedRow());
-           new VisualizaOs(os).setVisible(true);
-           
+           OrdemDeServico os = this.osLista.get(tabelaOS.getSelectedRow());
+           new VisualizaOs(os, false).setVisible(true);
         }
     }//GEN-LAST:event_tabelaOSMouseClicked
 
